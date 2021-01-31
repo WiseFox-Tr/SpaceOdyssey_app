@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">SpaceOdysseyApp</string>
+    <!-- Main Screen -->
+    <string name="welcome">Bienvenue</string>
+    <string name="whatToDo">Qu\'allez vous faire aujourd\'hui ?</string>
+    <string name="btnNews">Actualités</string>
+    <string name="btnLesson">Cours</string>
+    <string name="btnQuizz">Quizz</string>
+    <string name="btnLogIn">Se connecter</string>
+    <string name="didYouKnowTitle">Le saviez vous ?</string>
+    <string name="didYouKnowText">Sed laeditur hic coetuum magnificus splendor levitate paucorum incondita, ubi nati sunt non reputantium, sed tamquam indulta licentia vitiis ad errores lapsorum ac lasciviam. ut enim Simonides lyricus docet, beate perfecta ratione vieturo ante alia patriam esse convenit gloriosam.</string>
 </resources>
+
