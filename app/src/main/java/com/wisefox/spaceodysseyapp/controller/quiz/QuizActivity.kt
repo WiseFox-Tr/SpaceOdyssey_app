@@ -1,7 +1,9 @@
 package com.wisefox.spaceodysseyapp.controller.quiz
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import com.wisefox.spaceodysseyapp.R
 
@@ -26,5 +28,10 @@ class QuizActivity : AppCompatActivity() {
         //init content
         tvTitle.text = getString(R.string.quiz)
         tvSubTitle.text = getString(R.string.whatWantToDo)
+    }
+
+    fun onClickSetUpQuiz(view: View) {
+        val intentSetUpQuizActivity = Intent(this, SetUpQuizActivity::class.java)
+        startActivity(intentSetUpQuizActivity);
     }
 }

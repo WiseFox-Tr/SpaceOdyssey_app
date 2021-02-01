@@ -21,12 +21,6 @@ class MainActivity : AppCompatActivity() {
         findViewsAndInitContent()
     }
 
-
-    fun onClickQuizActivity(view: View) {
-        val intentQuizActivity = Intent(this, QuizActivity::class.java)
-        startActivity(intentQuizActivity)
-    }
-
     private fun findViewsAndInitContent() {
         //find views
         tvTitle = findViewById(R.id.tv_title)
@@ -35,5 +29,10 @@ class MainActivity : AppCompatActivity() {
         //init Content
         tvTitle.text = getString(R.string.welcome)
         tvSubTitle.text = getString(R.string.whatToDo)
+    }
+
+    fun onClickQuizActivity(view: View) {
+        val intentQuizActivity = Intent(this, QuizActivity::class.java)
+        startActivity(intentQuizActivity)
     }
 }
