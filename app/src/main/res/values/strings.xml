@@ -18,6 +18,8 @@
     <!-- Set Up Screen-->
     <string name="playAQuiz">Jouer</string>
     <string name="scoreboard">Tableau des scores</string>
+    <string name="theme">Thème</string>
+    <string name="level">Difficulté</string>
 
     <!-- element title-->
     <string name="whatWantToDo">Que voulez vous faire ?</string>
