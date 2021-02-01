@@ -15,11 +15,23 @@
     <string name="didYouKnowTitle">Le saviez vous ?</string>
     <string name="didYouKnowText">Sed laeditur hic coetuum magnificus splendor levitate paucorum incondita, ubi nati sunt non reputantium, sed tamquam indulta licentia vitiis ad errores lapsorum ac lasciviam. ut enim Simonides lyricus docet, beate perfecta ratione vieturo ante alia patriam esse convenit gloriosam.</string>
 
-    <!-- Set Up Screen-->
+    <!-- Quiz home Screen-->
     <string name="playAQuiz">Jouer</string>
     <string name="scoreboard">Tableau des scores</string>
+
+    <!-- set up a quiz Screen-->
     <string name="theme">Thème</string>
     <string name="level">Difficulté</string>
+    <string name="launch">Lancer</string>
+
+    <!-- set up a quiz Screen-->
+    <string name="score">Score : </string>
+    <string name="questionNumber">Question n° </string>
+    <string name="defaultNumber">0</string>
+    <string name="questionNumberMax"> /10</string>
+    <string name="questionByDefault">Ceci est il une question par défaut ?</string>
+    <string name="timeRemain">Temps restant : </string>
+    <string name="sec">sec</string>
 
     <!-- element title-->
     <string name="whatWantToDo">Que voulez vous faire ?</string>
