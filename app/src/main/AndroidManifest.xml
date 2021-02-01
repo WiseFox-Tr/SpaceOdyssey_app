@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SpaceOdysseyApp">
-        <activity android:name=".controller.quiz.SetUpQuizActivity"></activity>
+        <activity android:name=".controller.quiz.PlayQuizActivity"></activity>
+        <activity android:name=".controller.quiz.SetUpQuizActivity" />
         <activity android:name=".controller.quiz.QuizActivity" />
         <activity android:name=".controller.MainActivity">
             <intent-filter>
