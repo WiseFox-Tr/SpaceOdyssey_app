@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.wisefox.spaceodysseyapp">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SpaceOdysseyApp">
+        android:theme="@style/Theme.SpaceOdysseyApp"
+        tools:targetApi="m">
         <activity android:name=".controller.quiz.PlayQuizActivity"></activity>
         <activity android:name=".controller.quiz.SetUpQuizActivity" />
         <activity android:name=".controller.quiz.QuizActivity" />
