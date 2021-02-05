@@ -1,5 +1,7 @@
 package com.wisefox.spaceodysseyapp.model
 
+import java.io.Serializable
+
 data class QuestionBean(
     val quest_id: Long,
     val quest_content: String,
@@ -10,7 +12,7 @@ data class QuestionBean(
     val quest_explanation: String,
     val levelBean: LevelBean,
     val themeBean: ThemeBean,
-)
+) : Serializable
 
 data class ParamsBean(
     val levelBean: LevelBean,
@@ -20,12 +22,12 @@ data class ParamsBean(
 data class LevelBean(
     val lvl_id: Byte,
     val lvl_name: String,
-)
+) : Serializable
 
 data class ThemeBean(
     val theme_id: Byte,
     val theme_name: String,
-)
+) : Serializable
 
 data class ResponseCodeBean<T>(
     val code: Int,
