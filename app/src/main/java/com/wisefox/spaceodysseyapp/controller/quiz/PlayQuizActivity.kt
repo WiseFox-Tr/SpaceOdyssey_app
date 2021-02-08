@@ -26,7 +26,7 @@ class PlayQuizActivity : AppCompatActivity() {
 
         Log.d(Const.TAG_CONTROLLER, "LIST OF QUESTIONS RETRIEVED BY PLAY A QUIZ ACTIVITY : \n\n")
         for(i in quiz.questions.indices) {
-            Log.d(Const.TAG_CONTROLLER, "question ${i}: --> ${quiz.questions[i]}")
+            Log.d(Const.TAG_CONTROLLER, "question ${i+1}: --> ${quiz.questions[i]}")
         }
     }
 
