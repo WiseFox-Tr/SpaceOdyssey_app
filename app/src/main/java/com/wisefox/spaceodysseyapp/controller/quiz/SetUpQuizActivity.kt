@@ -19,7 +19,7 @@ class SetUpQuizActivity : AppCompatActivity() {
     private lateinit var tvSubTitle: TextView
 
     //data
-    private var params = ParamsBean(
+    private var params = Params(
         level = LevelBean(1, "Débutant"),
         theme = ThemeBean(1, "Systèmes planétaires")
     )
