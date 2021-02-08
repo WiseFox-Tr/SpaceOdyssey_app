@@ -10,13 +10,13 @@ data class QuestionBean(
     val quest_answer3: String?,
     val quest_answer4: String?,
     val quest_explanation: String,
-    val levelBean: LevelBean,
-    val themeBean: ThemeBean,
+    val level: LevelBean,
+    val theme: ThemeBean,
 ) : Serializable
 
 data class ParamsBean(
-    val levelBean: LevelBean,
-    val themeBean: ThemeBean,
+    val level: LevelBean,
+    val theme: ThemeBean,
 )
 
 data class LevelBean(
