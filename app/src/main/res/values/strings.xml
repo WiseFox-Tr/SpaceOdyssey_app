@@ -36,5 +36,13 @@
     <string name="score">Score : </string>
     <string name="timeRemain">Temps restant : </string>
 
+
+    <!-- warnings -->
+    <string name="warningNotLogged">Tu n\'es pas connecté, tes résultats ne pourront être sauvegardés…</string>
+
+    <!-- error messages -->
+    <string name="errorLackOfQuestions">Nous n\'avons pas suffisamment de questions pour ces paramètres… nous t\'invitons à les changer.</string>
+    <string name="errorGeneric">Oups ! Un problème est survenu, nous t\'invitons à réessayer plus tard…</string>
+
 </resources>
 
