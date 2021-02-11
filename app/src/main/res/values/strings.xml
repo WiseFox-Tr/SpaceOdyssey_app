@@ -1,40 +1,40 @@
 <resources>
 
     <!-- General -->
-    <string name="title">Titre</string>
-    <string name="sub_title">Sous-titre</string>
     <string name="app_name">SpaceOdysseyApp</string>
+    <string name="sub_title">Sous-titre</string>
+    <string name="title">Titre</string>
+    <string name="whatWantToDo">Que voulez vous faire ?</string>
 
     <!-- Main Screen -->
+    <string name="didYouKnowText">Sed laeditur hic coetuum magnificus splendor levitate paucorum incondita, ubi nati sunt non reputantium, sed tamquam indulta licentia vitiis ad errores lapsorum ac lasciviam. ut enim Simonides lyricus docet, beate perfecta ratione vieturo ante alia patriam esse convenit gloriosam.</string>
+    <string name="didYouKnowTitle">Le saviez vous ?</string>
+    <string name="lesson">Cours</string>
+    <string name="logIn">Se connecter</string>
+    <string name="news">Actualités</string>
+    <string name="quiz">Quiz</string>
     <string name="welcome">Bienvenue</string>
     <string name="whatToDo">Qu\'allez vous faire aujourd\'hui ?</string>
-    <string name="news">Actualités</string>
-    <string name="lesson">Cours</string>
-    <string name="quiz">Quiz</string>
-    <string name="logIn">Se connecter</string>
-    <string name="didYouKnowTitle">Le saviez vous ?</string>
-    <string name="didYouKnowText">Sed laeditur hic coetuum magnificus splendor levitate paucorum incondita, ubi nati sunt non reputantium, sed tamquam indulta licentia vitiis ad errores lapsorum ac lasciviam. ut enim Simonides lyricus docet, beate perfecta ratione vieturo ante alia patriam esse convenit gloriosam.</string>
 
     <!-- Quiz home Screen-->
     <string name="playAQuiz">Jouer</string>
     <string name="scoreboard">Tableau des scores</string>
 
     <!-- set up a quiz Screen-->
-    <string name="theme">Thème</string>
-    <string name="level">Difficulté</string>
+    <string name="easy">Facile</string>
     <string name="launch">Lancer</string>
+    <string name="level">Difficulté</string>
+    <string name="theme">Thème</string>
+    <string name="planetSystems">Systèmes planétaires</string>
 
     <!-- set up a quiz Screen-->
-    <string name="score">Score : </string>
-    <string name="questionNumber">Question n° </string>
     <string name="defaultNumber">0</string>
-    <string name="questionNumberMax"> /10</string>
     <string name="questionByDefault">Ceci est il une question par défaut ?</string>
-    <string name="timeRemain">Temps restant : </string>
+    <string name="questionNumber">Question n° </string>
+    <string name="questionNumberMax"> /10</string>
     <string name="sec">sec</string>
-
-    <!-- element title-->
-    <string name="whatWantToDo">Que voulez vous faire ?</string>
+    <string name="score">Score : </string>
+    <string name="timeRemain">Temps restant : </string>
 
 </resources>
 
