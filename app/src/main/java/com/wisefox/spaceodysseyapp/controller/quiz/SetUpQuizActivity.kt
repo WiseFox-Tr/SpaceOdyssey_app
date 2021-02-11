@@ -6,22 +6,26 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.wisefox.spaceodysseyapp.R
+import com.wisefox.spaceodysseyapp.controller.ControllerUtils
 import com.wisefox.spaceodysseyapp.model.*
 import com.wisefox.spaceodysseyapp.model.webServices.WSUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+
 
 class SetUpQuizActivity : AppCompatActivity() {
 
     // Graphics
     private lateinit var tvTitle: TextView
     private lateinit var tvSubTitle: TextView
+    private lateinit var rootView: View
 
     //data
     private var params = ParamsBean(
-        level = LevelBean(1, "Débutant"),
-        theme = ThemeBean(1, "Systèmes planétaires")
+            level = LevelBean(1, "Débutant"),
+            theme = ThemeBean(1, "Systèmes planétaires")
     )
     private lateinit var quiz :QuizBean
 
@@ -35,6 +39,7 @@ class SetUpQuizActivity : AppCompatActivity() {
         //find views
         tvTitle = findViewById(R.id.tv_title)
         tvSubTitle = findViewById(R.id.tv_sub_title)
+        rootView = findViewById(R.id.root_set_up)
 
         //init content
         tvTitle.text = getString(R.string.quiz)
@@ -53,9 +58,11 @@ class SetUpQuizActivity : AppCompatActivity() {
 
                 startActivity(intentPlayQuizActivity)
             }
-            catch (e :Exception) {
+            catch (e: Exception) {
                 e.printStackTrace()
-                //todo: update UI by displaying an error message
+                launch(Main) {
+                    ControllerUtils.displaySnackbar(rootView = rootView, message = ControllerUtils.manageError(exception = e, context = this@SetUpQuizActivity), context = this@SetUpQuizActivity)
+                }
             }
         }
     }
