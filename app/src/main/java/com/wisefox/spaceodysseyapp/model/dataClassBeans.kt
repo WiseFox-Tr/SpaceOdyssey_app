@@ -33,4 +33,4 @@ data class ResponseCodeBean<T>(
 data class ParamsBean(
         val level: LevelBean,
         val theme: ThemeBean,
-)
+) : Serializable
