@@ -1,6 +1,6 @@
-package com.wisefox.spaceodysseyapp.utils
+package com.wisefox.spaceodysseyapp.model
 
-class Const {
+class AppConst {
     companion object {
         //TAG Logs
         const val TAG_WS = "WSUtils"
