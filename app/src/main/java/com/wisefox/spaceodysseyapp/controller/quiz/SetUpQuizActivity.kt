@@ -19,11 +19,11 @@ class SetUpQuizActivity : AppCompatActivity() {
     private lateinit var tvSubTitle: TextView
 
     //data
-    private var params = Params(
+    private var params = ParamsBean(
         level = LevelBean(1, "Débutant"),
         theme = ThemeBean(1, "Systèmes planétaires")
     )
-    private lateinit var quiz :Quiz
+    private lateinit var quiz :QuizBean
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +46,7 @@ class SetUpQuizActivity : AppCompatActivity() {
         CoroutineScope(IO).launch {
             //request for questions & start PlayQuizActivity with questionsList
             try {
-                val questionsList: List<QuestionBean> = WSUtils.getQuestions(params)
-                quiz = Quiz(questions = questionsList)
+                quiz = QuizBean(questions = WSUtils.getQuestions(params))
 
                 val intentPlayQuizActivity = Intent(this@SetUpQuizActivity, PlayQuizActivity::class.java)
                 intentPlayQuizActivity.putExtra("quiz", quiz)
