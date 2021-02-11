@@ -46,7 +46,7 @@ class SetUpQuizActivity : AppCompatActivity() {
         CoroutineScope(IO).launch {
             //request for questions & start PlayQuizActivity with questionsList
             try {
-                quiz = QuizBean(questions = WSUtils.getQuestions(params))
+                quiz = QuizBean(questions = WSUtils.getQuestions(params), params = params)
 
                 val intentPlayQuizActivity = Intent(this@SetUpQuizActivity, PlayQuizActivity::class.java)
                 intentPlayQuizActivity.putExtra("quiz", quiz)
