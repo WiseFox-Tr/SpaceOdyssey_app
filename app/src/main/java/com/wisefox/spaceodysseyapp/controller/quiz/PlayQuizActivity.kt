@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.wisefox.spaceodysseyapp.R
 import com.wisefox.spaceodysseyapp.model.QuizBean
-import com.wisefox.spaceodysseyapp.utils.Const
+import com.wisefox.spaceodysseyapp.model.AppConst
 
 class PlayQuizActivity : AppCompatActivity() {
 
@@ -29,9 +29,9 @@ class PlayQuizActivity : AppCompatActivity() {
         quiz = intent.getSerializableExtra("quiz") as QuizBean
         findViewsAndInitContent()
 
-        Log.d(Const.TAG_CONTROLLER, "LIST OF QUESTIONS RETRIEVED BY PLAY A QUIZ ACTIVITY : \n\n")
+        Log.d(AppConst.TAG_CONTROLLER, "LIST OF QUESTIONS RETRIEVED BY PLAY A QUIZ ACTIVITY : \n\n")
         for(i in quiz.questions.indices) {
-            Log.d(Const.TAG_CONTROLLER, "question ${i+1}: --> ${quiz.questions[i]}")
+            Log.d(AppConst.TAG_CONTROLLER, "question ${i+1}: --> ${quiz.questions[i]}")
         }
     }
 
