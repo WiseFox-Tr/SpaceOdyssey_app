@@ -63,7 +63,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="@string/defaultNumber" />
+                android:text="1"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,8 +79,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textSize="18sp"
-            android:text="@string/questionByDefault" />
+            android:gravity="center"
+            android:text="@string/questionByDefault"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -163,7 +165,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="@string/defaultNumber" />
+                android:text="10"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="wrap_content"

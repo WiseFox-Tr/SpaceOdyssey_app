@@ -19,6 +19,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.55"
         android:paddingStart="40dp"
+        android:paddingEnd="40dp"
         android:orientation="vertical">
 
         <TextView
@@ -36,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="20dp"
-            android:text="SYSTEME SOLAIRE"
+            android:text="@string/planetSystems"
             android:textSize="18sp" />
 
         <TextView
@@ -53,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="20dp"
-            android:text="DEBUTANT"
+            android:text="@string/easy"
             android:textSize="18sp" />
 
     </LinearLayout>
