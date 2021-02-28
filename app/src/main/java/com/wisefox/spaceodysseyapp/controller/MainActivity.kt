@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private fun findViewsAndInitContent() {
         //find views
         tvTitle = findViewById(R.id.tv_title)
-        tvSubTitle = findViewById(R.id.tv_sub_title)
+        tvSubTitle = findViewById(R.id.tv_subTitle)
 
         //init Content
         tvTitle.text = getString(R.string.welcome)

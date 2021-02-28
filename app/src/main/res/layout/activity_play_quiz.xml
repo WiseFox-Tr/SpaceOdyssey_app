@@ -60,6 +60,7 @@
                 android:text="@string/questionNumber" />
 
             <TextView
+                android:id="@+id/tv_questionNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
@@ -75,7 +76,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_question_content"
+            android:id="@+id/tv_questionContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"

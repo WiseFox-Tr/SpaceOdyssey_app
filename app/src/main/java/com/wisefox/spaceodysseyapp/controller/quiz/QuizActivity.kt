@@ -23,7 +23,7 @@ class QuizActivity : AppCompatActivity() {
     private fun findViewsAndInitContent() {
         //find views
         tvTitle = findViewById(R.id.tv_title)
-        tvSubTitle = findViewById(R.id.tv_sub_title)
+        tvSubTitle = findViewById(R.id.tv_subTitle)
 
         //init content
         tvTitle.text = getString(R.string.quiz)

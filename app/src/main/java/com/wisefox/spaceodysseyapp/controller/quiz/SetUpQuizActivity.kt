@@ -38,7 +38,7 @@ class SetUpQuizActivity : AppCompatActivity() {
     private fun findViewsAndInitContent() {
         //find views
         tvTitle = findViewById(R.id.tv_title)
-        tvSubTitle = findViewById(R.id.tv_sub_title)
+        tvSubTitle = findViewById(R.id.tv_subTitle)
         rootView = findViewById(R.id.root_set_up)
 
         //init content
