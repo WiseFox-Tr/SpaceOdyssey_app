@@ -2,9 +2,9 @@ package com.wisefox.spaceodysseyapp.model
 
 import java.io.Serializable
 
-class QuizBean (
-        val questions: List<QuestionBean>,
-        val params: ParamsBean,
+class Quiz (
+        val questions: List<Question>,
+        val params: Params,
         val nbQuestions: Int = 10,
         var nbGoodAnswer: Int = 0,
         var score: Int = 0,

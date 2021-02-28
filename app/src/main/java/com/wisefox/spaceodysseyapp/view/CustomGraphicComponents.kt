@@ -6,7 +6,7 @@ import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.wisefox.spaceodysseyapp.R
 
-class CustomizeGraphicsComponent {
+class CustomGraphicComponents {
     companion object {
         fun setSnackbarStyle(
                 snackbar: Snackbar,

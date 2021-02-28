@@ -1,4 +1,4 @@
-package com.wisefox.spaceodysseyapp.model.webServices
+package com.wisefox.spaceodysseyapp.utils
 
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -19,8 +19,8 @@ class OkHttp {
             val request = Request.Builder().url(url).build()
             val response = client.newCall(request).execute()
             //return's code analysis
-            return if (response.code < 200 || response.code >= 300) {
-                throw Exception("Réponse du serveur incorrecte : " + response.code)
+            return if (response.code != 200) {
+                throw Exception("Incorrect server response : code ${response.code}")
             }
             //request result
             else {
@@ -29,18 +29,18 @@ class OkHttp {
         }
 
         @Throws(Exception::class)
-        fun sendPostOkHttpRequest(url: String, paramJson: String): String {
+        fun sendPostOkHttpRequest(url: String, jsonToSend: String): String {
             println("url : $url")
 
             //body request
-            val body = paramJson.toRequestBody(MEDIA_TYPE_JSON)
+            val body = jsonToSend.toRequestBody(MEDIA_TYPE_JSON)
 
             //request creation & request execution
             val request = Request.Builder().url(url).post(body).build()
             val response = client.newCall(request).execute()
             //return's code analysis
-            return if (response.code < 200 || response.code >= 300) {
-                throw Exception("Réponse du serveur incorrect : " + response.code)
+            return if (response.code != 200) {
+                throw Exception("Incorrect server response : code ${response.code}")
             }
             //request result
             else {

@@ -6,9 +6,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.wisefox.spaceodysseyapp.R
-import com.wisefox.spaceodysseyapp.controller.ControllerUtils
+import com.wisefox.spaceodysseyapp.controller.CommonController
 import com.wisefox.spaceodysseyapp.model.*
-import com.wisefox.spaceodysseyapp.model.webServices.WSUtils
+import com.wisefox.spaceodysseyapp.model.webServices.WebServices
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -23,11 +23,11 @@ class SetUpQuizActivity : AppCompatActivity() {
     private lateinit var rootView: View
 
     //data
-    private var params = ParamsBean(
-            level = LevelBean(1, "Débutant"),
-            theme = ThemeBean(1, "Systèmes planétaires")
+    private var params = Params(
+            level = Level(1, "Débutant"),
+            theme = Theme(1, "Systèmes planétaires")
     )
-    private lateinit var quiz :QuizBean
+    private lateinit var quiz :Quiz
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +49,10 @@ class SetUpQuizActivity : AppCompatActivity() {
     fun onClickPlayQuiz(view: View) {
 
         CoroutineScope(IO).launch {
-            //request for questions & start PlayQuizActivity with questionsList
+            //request for questions & start PlayQuizActivity with questionsList retrieved from server
             try {
-                quiz = QuizBean(questions = WSUtils.getQuestions(params), params = params)
+                val questionsList = WebServices.getQuestions(params)
+                quiz = Quiz(questionsList, params = params)
 
                 val intentPlayQuizActivity = Intent(this@SetUpQuizActivity, PlayQuizActivity::class.java)
                 intentPlayQuizActivity.putExtra("quiz", quiz)
@@ -61,7 +62,11 @@ class SetUpQuizActivity : AppCompatActivity() {
             catch (e: Exception) {
                 e.printStackTrace()
                 launch(Main) {
-                    ControllerUtils.displaySnackbar(rootView = rootView, message = ControllerUtils.manageError(exception = e, context = this@SetUpQuizActivity), context = this@SetUpQuizActivity)
+                    CommonController.displaySnackbar(
+                            rootView = rootView,
+                            message = CommonController.manageError(exception = e, context = this@SetUpQuizActivity),
+                            context = this@SetUpQuizActivity
+                    )
                 }
             }
         }

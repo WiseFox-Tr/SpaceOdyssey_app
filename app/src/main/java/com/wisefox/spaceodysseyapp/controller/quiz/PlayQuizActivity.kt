@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.wisefox.spaceodysseyapp.R
-import com.wisefox.spaceodysseyapp.model.QuizBean
+import com.wisefox.spaceodysseyapp.model.Quiz
 import com.wisefox.spaceodysseyapp.model.AppConst
 
 class PlayQuizActivity : AppCompatActivity() {
@@ -21,12 +21,12 @@ class PlayQuizActivity : AppCompatActivity() {
     private lateinit var btn4: Button
 
     //Data
-    private lateinit var quiz : QuizBean
+    private lateinit var quiz : Quiz
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_quiz)
-        quiz = intent.getSerializableExtra("quiz") as QuizBean
+        quiz = intent.getSerializableExtra("quiz") as Quiz
         findViewsAndInitContent()
 
         Log.d(AppConst.TAG_CONTROLLER, "LIST OF QUESTIONS RETRIEVED BY PLAY A QUIZ ACTIVITY : \n\n")
