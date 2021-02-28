@@ -25,6 +25,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvTitle: TextView
     private lateinit var tvSubTitle: TextView
     private lateinit var tvQuestion: TextView
+    private lateinit var tvQuestionNumber: TextView
     private lateinit var btnAnswer1: Button
     private lateinit var btnAnswer2: Button
     private lateinit var btnAnswer3: Button
@@ -34,10 +35,23 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvGoodOrBadAnswer: TextView
     private lateinit var tvScoreEvolution: TextView
     private lateinit var tvQuestionExplanation: TextView
+    private lateinit var btnNextQuestion: Button
 
     //Data
     private lateinit var quiz : Quiz
 
+    //utils
+    private var questionIndex = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_play_quiz)
+        quiz = intent.getSerializableExtra("quiz") as Quiz
+        initialConfiguration()
+        displayAQuestion(quiz.questions[0])
+    }
+
+    /** this method find views by id, set on click listeners and init initial content independently of question played. **/
     private fun initialConfiguration() {
         //find views - layout
         layoutBtnAnswers = findViewById(R.id.layout_btnAnswers)
@@ -45,66 +59,35 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         layoutAnswerResult = findViewById(R.id.layout_answerResult)
         //find views - components
         tvTitle = findViewById(R.id.tv_title)
-        tvSubTitle = findViewById(R.id.tv_sub_title)
-        tvQuestion = findViewById(R.id.tv_question_content)
+        tvSubTitle = findViewById(R.id.tv_subTitle)
+        tvQuestion = findViewById(R.id.tv_questionContent)
+        tvQuestionNumber = findViewById(R.id.tv_questionNumber)
         btnAnswer1 = findViewById(R.id.btn_answer1)
         btnAnswer2 = findViewById(R.id.btn_answer2)
         btnAnswer3 = findViewById(R.id.btn_answer3)
         btnAnswer4 = findViewById(R.id.btn_answer4)
+
         timeRemainingSec = findViewById(R.id.tv_timeRemainingSec)
         pbTime = findViewById(R.id.pb_timer)
         tvGoodOrBadAnswer = findViewById(R.id.tv_goodOrBadAnswer)
         tvScoreEvolution = findViewById(R.id.tv_scoreEvolution)
         tvQuestionExplanation = findViewById(R.id.tv_questionExplanation)
-
+        btnNextQuestion = findViewById(R.id.btn_nextQuestion)
 
         //setListeners
         btnAnswer1.setOnClickListener(this)
         btnAnswer2.setOnClickListener(this)
         btnAnswer3.setOnClickListener(this)
         btnAnswer4.setOnClickListener(this)
+        btnNextQuestion.setOnClickListener(this)
 
         //init content
         tvTitle.text = getString(R.string.quiz)
         tvSubTitle.text = quiz.params.theme.theme_name
-        layoutAnswerResult.visibility = GONE
     }
-
-    private fun displayAQuestion(question: Question) {
-        tvQuestion.text = question.quest_content
-        btnAnswer1.text = question.quest_answer1
-        btnAnswer2.text = question.quest_answer2
-        btnAnswer3.text = question.quest_answer3
-        btnAnswer4.text = question.quest_answer4
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_play_quiz)
-        quiz = intent.getSerializableExtra("quiz") as Quiz
-        initialConfiguration()
-        playQuiz()
-    }
-
-
-    private fun playQuiz() {
-        val countQuestion = 0;
-
-        //todo : implement loop for all questions
-//        do {
-//
-//        } while (countQuestion < quiz.questions.size)
-
-
-        //display questions
-        displayAQuestion(quiz.questions[countQuestion])
-        //after click, withdraw btn for answers
-        //& display result
-    }
-
 
     private fun verifyIfGoodAnswer(btnText : CharSequence) {
-        val goodAnswer = quiz.questions[0].quest_answer1
+        val goodAnswer = quiz.questions[questionIndex].quest_answer1
         val isGoodAnswer: Boolean
 
         when (btnText) {
@@ -114,7 +97,10 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         showQuestionResult(isGoodAnswer)
     }
 
-    //hides answerBtn & Timer and show result content
+    /** this method hides answerBtn & Timer and show result content
+     *
+     * @param[isGoodAnswer] it takes a boolean as params
+     * **/
     fun showQuestionResult(isGoodAnswer: Boolean) {
         layoutBtnAnswers.visibility = GONE
         layoutTimer.visibility = GONE
@@ -127,7 +113,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
             tvGoodOrBadAnswer.text = getString(R.string.badAnswer)
             tvScoreEvolution.text = getString(R.string.scoreEvolution)
         }
-        tvQuestionExplanation.text = quiz.questions[0].quest_explanation
+        tvQuestionExplanation.text = quiz.questions[questionIndex].quest_explanation
     }
 
     /* *******************
@@ -139,7 +125,39 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
             btnAnswer2 -> verifyIfGoodAnswer(btnAnswer2.text)
             btnAnswer3 -> verifyIfGoodAnswer(btnAnswer3.text)
             btnAnswer4 -> verifyIfGoodAnswer(btnAnswer4.text)
+            //change question when user click on this question
+            btnNextQuestion -> {
+                if(questionIndex < quiz.questions.size - 1) {
+                    questionIndex++
+                    layoutBtnAnswers.visibility = VISIBLE
+                    layoutTimer.visibility = VISIBLE
+                    layoutAnswerResult.visibility = GONE
+                    displayAQuestion(quiz.questions[questionIndex])
+                }
+                else {
+                    Log.w(AppConst.TAG_CONTROLLER, "Quiz is over!")
+                    //todo : display quiz result
+                }
+            }
         }
+    }
+
+
+    /* *******************
+    --GRAPHICAL METHODS--
+    ********************* */
+
+    /** display the content of a question : the question itself, this number in question list and it's possible answers
+     *
+     * @param[question] this method take the question to display as param
+     * **/
+    private fun displayAQuestion(question: Question) {
+        tvQuestion.text = question.quest_content
+        tvQuestionNumber.text = (questionIndex + 1).toString()
+        btnAnswer1.text = question.quest_answer1
+        btnAnswer2.text = question.quest_answer2
+        btnAnswer3.text = question.quest_answer3
+        btnAnswer4.text = question.quest_answer4
     }
 }
 
