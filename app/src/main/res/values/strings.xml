@@ -36,7 +36,7 @@
     <string name="questionByDefault">Ceci est il une question par défaut ?</string>
     <string name="questionNumber">Question n° </string>
     <string name="questionNumberMax"> /10</string>
-    <string name="scoreEvolution">+ 0 points</string>
+    <string name="scoreEvolution">+ 0 point</string>
     <string name="sec">10 sec</string>
     <string name="score">Score : </string>
     <string name="timeRemain">Temps restant : </string>
