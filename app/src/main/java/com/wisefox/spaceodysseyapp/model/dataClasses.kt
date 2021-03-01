@@ -25,8 +25,8 @@ data class Theme(
 ) : Serializable
 
 data class Params(
-        val level: Level,
-        val theme: Theme,
+    val levels: List<Level>,
+    val themes: List<Theme>,
 ) : Serializable
 
 data class ServerResponse<T>(

@@ -23,9 +23,13 @@ class SetUpQuizActivity : AppCompatActivity() {
     private lateinit var rootView: View
 
     //data
+    private var levelChosen = Level(1, "Débutant")
+    private var themeChosen = Theme(1, "Systèmes planétaires")
+
+
     private var params = Params(
-            level = Level(1, "Débutant"),
-            theme = Theme(1, "Systèmes planétaires")
+            levels = mutableListOf(levelChosen),
+            themes = mutableListOf(themeChosen)
     )
     private lateinit var quiz :Quiz
 
