@@ -39,9 +39,10 @@
     <string name="newGame">Nouvelle partie</string>
     <string name="questionByDefault">Ceci est il une question par défaut ?</string>
     <string name="questionNumber">Question n° </string>
-    <string name="questionNumberMax"> /10</string>
+    <string name="questionNumberMax">/ %1$d</string>
     <string name="result">Résultat :</string>
-    <string name="scoreEvolution">+ 0 point</string>
+    <string name="scoreEvolution0">0 point…</string>
+    <string name="scoreEvolution">+ %1$d points</string>
     <string name="sec">10 sec</string>
     <string name="score">Score : </string>
     <string name="timeRemain">Temps restant : </string>
