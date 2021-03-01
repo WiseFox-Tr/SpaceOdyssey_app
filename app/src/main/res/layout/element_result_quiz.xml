@@ -50,7 +50,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/tv_resultQuizMaxQuestions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/ 10"
@@ -77,7 +77,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_resultQuizNewGame"
-            android:layout_width="250dp"
+            android:layout_width="210dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
@@ -87,7 +87,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_resultQuizScoreBoard"
-            android:layout_width="250dp"
+            android:layout_width="210dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
@@ -97,7 +97,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_resultQuizMainMenu"
-            android:layout_width="250dp"
+            android:layout_width="210dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
