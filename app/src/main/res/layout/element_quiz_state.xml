@@ -56,9 +56,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_maxQuestions"
+            android:id="@+id/tv_QuizStateMaxQuestions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:text="@string/questionNumberMax"
             android:textSize="18sp"
             android:textStyle="bold" />
