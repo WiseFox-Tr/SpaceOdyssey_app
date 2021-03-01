@@ -39,7 +39,7 @@ class SetUpQuizActivity : AppCompatActivity() {
         //find views
         tvTitle = findViewById(R.id.tv_title)
         tvSubTitle = findViewById(R.id.tv_subTitle)
-        rootView = findViewById(R.id.root_set_up)
+        rootView = findViewById(R.id.root_setUp)
 
         //init content
         tvTitle.text = getString(R.string.quiz)
@@ -51,6 +51,7 @@ class SetUpQuizActivity : AppCompatActivity() {
         CoroutineScope(IO).launch {
             //request for questions & start PlayQuizActivity with questionsList retrieved from server
             try {
+                //todo: update UI with a progress bar
                 val questionsList = WebServices.getQuestions(params)
                 quiz = Quiz(questionsList, params = params)
 
