@@ -11,8 +11,7 @@
         android:id="@+id/tv_goodOrBadAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="@string/goodAnswer"
         android:textColor="@color/text_yellow_orange"
@@ -23,8 +22,7 @@
         android:id="@+id/tv_scoreEvolution"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:gravity="center"
         android:text="@string/scoreEvolution"
         android:textColor="@color/text_red"
@@ -39,11 +37,11 @@
         android:layout_marginBottom="10dp"
         android:background="#3F51B5"
         android:paddingStart="5dp"
-        android:paddingTop="10dp"
+        android:paddingTop="5dp"
         android:paddingEnd="5dp"
         android:paddingBottom="10dp"
         android:text="@string/explanation"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textColor="#FFFFFF" />
 
     <com.google.android.material.button.MaterialButton
@@ -51,8 +49,8 @@
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/next"
         app:backgroundTint="@color/btn_yellow_orange" />
 </LinearLayout>
