@@ -129,40 +129,22 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         tvQuestionExplanation.text = quiz.questions[questionIndex].quest_explanation
     }
 
-    /* *******************
-    --ON CLICK MANAGEMENT--
-    ********************* */
-    override fun onClick(v: View?) {
-        when(v) {
-            btnAnswer1 -> verifyIfGoodAnswer(btnAnswer1.text)
-            btnAnswer2 -> verifyIfGoodAnswer(btnAnswer2.text)
-            btnAnswer3 -> verifyIfGoodAnswer(btnAnswer3.text)
-            btnAnswer4 -> verifyIfGoodAnswer(btnAnswer4.text)
-            //change question when user click on this question
-            btnNextQuestion -> {
-                if (questionIndex < quiz.questions.size - 1) {
-                    questionIndex++
-                    layoutBtnAnswers.visibility = VISIBLE
-                    layoutTimer.visibility = VISIBLE
-                    layoutResultAnswer.visibility = GONE
-                    displayAQuestion(quiz.questions[questionIndex])
-                } else {
-                    layoutQuizState.visibility = GONE
-                    layoutResultAnswer.visibility = GONE
-                    layoutResultQuiz.visibility = VISIBLE
-                    tvQuizResultMaxQuestions.text = getString(R.string.questionNumberMax, quiz.nbQuestions)
-                    Log.w(AppConst.TAG_CONTROLLER, "Quiz is over!")
-
-
-                }
-            }
+    //change question when user click on this question
+    private fun goToNextQuestion() {
+        if (questionIndex < quiz.questions.size - 1) {
+            questionIndex++
+            layoutBtnAnswers.visibility = VISIBLE
+            layoutTimer.visibility = VISIBLE
+            layoutResultAnswer.visibility = GONE
+            displayAQuestion(quiz.questions[questionIndex])
+        } else {
+            layoutQuizState.visibility = GONE
+            layoutResultAnswer.visibility = GONE
+            layoutResultQuiz.visibility = VISIBLE
+            tvQuizResultMaxQuestions.text = getString(R.string.questionNumberMax, quiz.nbQuestions)
+            Log.w(AppConst.TAG_CONTROLLER, "Quiz is over!")
         }
     }
-
-
-    /* *******************
-    --GRAPHICAL METHODS--
-    ********************* */
 
     /** display the content of a question : the question itself, this number in question list and it's possible answers
      *
@@ -177,7 +159,20 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         btnAnswer4.text = question.quest_answer4
     }
 
-    //todo: implement callbacks for resultQuizBtn
+    /* *******************
+--ON CLICK MANAGEMENT--
+********************* */
+    override fun onClick(v: View?) {
+        when(v) {
+            btnAnswer1 -> verifyIfGoodAnswer(btnAnswer1.text)
+            btnAnswer2 -> verifyIfGoodAnswer(btnAnswer2.text)
+            btnAnswer3 -> verifyIfGoodAnswer(btnAnswer3.text)
+            btnAnswer4 -> verifyIfGoodAnswer(btnAnswer4.text)
+            btnNextQuestion -> goToNextQuestion()
+        }
+    }
+
+    //todo: implement callbacks for resultQuizBtns
     //todo: update score
     //todo: set timer & progress bar
 }
