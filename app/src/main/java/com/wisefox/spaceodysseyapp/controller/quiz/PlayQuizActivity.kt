@@ -20,7 +20,9 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     //layout elements
     private lateinit var layoutBtnAnswers: LinearLayout
     private lateinit var layoutTimer: LinearLayout
-    private lateinit var layoutAnswerResult : LinearLayout
+    private lateinit var layoutResultAnswer: LinearLayout
+    private lateinit var layoutQuizState: LinearLayout
+    private lateinit var layoutResultQuiz: LinearLayout
     // Graphics
     private lateinit var tvTitle: TextView
     private lateinit var tvSubTitle: TextView
@@ -56,7 +58,9 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         //find views - layout
         layoutBtnAnswers = findViewById(R.id.layout_btnAnswers)
         layoutTimer = findViewById(R.id.layout_timer)
-        layoutAnswerResult = findViewById(R.id.layout_answerResult)
+        layoutResultAnswer = findViewById(R.id.layout_resultAnswer)
+        layoutQuizState = findViewById(R.id.layout_quizState)
+        layoutResultQuiz = findViewById(R.id.layout_resultQuiz)
         //find views - components
         tvTitle = findViewById(R.id.tv_title)
         tvSubTitle = findViewById(R.id.tv_subTitle)
@@ -83,7 +87,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
 
         //init content
         tvTitle.text = getString(R.string.quiz)
-        tvSubTitle.text = quiz.params.theme.theme_name
+        tvSubTitle.text = quiz.params.themes[0].theme_name
     }
 
     private fun verifyIfGoodAnswer(btnText : CharSequence) {
@@ -101,10 +105,10 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
      *
      * @param[isGoodAnswer] it takes a boolean as params
      * **/
-    fun showQuestionResult(isGoodAnswer: Boolean) {
+    private fun showQuestionResult(isGoodAnswer: Boolean) {
         layoutBtnAnswers.visibility = GONE
         layoutTimer.visibility = GONE
-        layoutAnswerResult.visibility = VISIBLE
+        layoutResultAnswer.visibility = VISIBLE
 
         if(isGoodAnswer) {
             tvGoodOrBadAnswer.text = getString(R.string.goodAnswer)
@@ -131,12 +135,15 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
                     questionIndex++
                     layoutBtnAnswers.visibility = VISIBLE
                     layoutTimer.visibility = VISIBLE
-                    layoutAnswerResult.visibility = GONE
+                    layoutResultAnswer.visibility = GONE
                     displayAQuestion(quiz.questions[questionIndex])
                 }
                 else {
+                    layoutQuizState.visibility = GONE
+                    layoutResultAnswer.visibility = GONE
+                    layoutResultQuiz.visibility = VISIBLE
                     Log.w(AppConst.TAG_CONTROLLER, "Quiz is over!")
-                    //todo : display quiz result
+
                 }
             }
         }
@@ -159,5 +166,9 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         btnAnswer3.text = question.quest_answer3
         btnAnswer4.text = question.quest_answer4
     }
+
+    //todo: implement callbacks for resultQuizBtn
+    //todo: update score
+    //todo: set timer & progress bar
 }
 
