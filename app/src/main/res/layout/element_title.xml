@@ -20,7 +20,7 @@
         android:id="@+id/tv_subTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sub_title"
+        android:text="@string/subTitle"
         android:textSize="24sp"
         android:textStyle="bold" />
 
