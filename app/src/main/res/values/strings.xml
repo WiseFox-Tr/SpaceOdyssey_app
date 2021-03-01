@@ -2,7 +2,9 @@
 
     <!-- General -->
     <string name="app_name">SpaceOdysseyApp</string>
-    <string name="sub_title">Sous-titre</string>
+    <string name="mainMenu">Menu Principal</string>
+    <string name="scoreboard">Tableau des scores</string>
+    <string name="subTitle">Sous-titre</string>
     <string name="title">Titre</string>
     <string name="whatWantToDo">Que voulez vous faire ?</string>
 
@@ -18,7 +20,7 @@
 
     <!-- Quiz home Screen-->
     <string name="playAQuiz">Jouer</string>
-    <string name="scoreboard">Tableau des scores</string>
+
 
     <!-- set up a quiz Screen-->
     <string name="easy">Facile</string>
@@ -32,10 +34,13 @@
     <string name="defaultNumber">0</string>
     <string name="explanation">La réponse correcte est que .... en effet ... C\'est ici qu\'est expliqué de manière concise la réponse à la question posée pour que l\'utilisateur puisse s\'instruire</string>
     <string name="goodAnswer">Bonne réponse</string>
+    <string name="goodAnswers">bonnes réponses</string>
     <string name="next">Suivant</string>
+    <string name="newGame">Nouvelle partie</string>
     <string name="questionByDefault">Ceci est il une question par défaut ?</string>
     <string name="questionNumber">Question n° </string>
     <string name="questionNumberMax"> /10</string>
+    <string name="result">Résultat :</string>
     <string name="scoreEvolution">+ 0 point</string>
     <string name="sec">10 sec</string>
     <string name="score">Score : </string>
