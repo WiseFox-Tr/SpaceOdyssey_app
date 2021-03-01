@@ -11,9 +11,10 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.wisefox.spaceodysseyapp.R
-import com.wisefox.spaceodysseyapp.model.Quiz
 import com.wisefox.spaceodysseyapp.model.AppConst
 import com.wisefox.spaceodysseyapp.model.Question
+import com.wisefox.spaceodysseyapp.model.Quiz
+
 
 class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -28,6 +29,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvSubTitle: TextView
     private lateinit var tvQuestion: TextView
     private lateinit var tvQuestionNumber: TextView
+    private lateinit var tvQuizStateMaxQuestion: TextView
     private lateinit var btnAnswer1: Button
     private lateinit var btnAnswer2: Button
     private lateinit var btnAnswer3: Button
@@ -38,6 +40,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvScoreEvolution: TextView
     private lateinit var tvQuestionExplanation: TextView
     private lateinit var btnNextQuestion: Button
+    private lateinit var tvQuizResultMaxQuestions: TextView
 
     //Data
     private lateinit var quiz : Quiz
@@ -61,22 +64,27 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         layoutResultAnswer = findViewById(R.id.layout_resultAnswer)
         layoutQuizState = findViewById(R.id.layout_quizState)
         layoutResultQuiz = findViewById(R.id.layout_resultQuiz)
-        //find views - components
+        //find views - title
         tvTitle = findViewById(R.id.tv_title)
         tvSubTitle = findViewById(R.id.tv_subTitle)
+        //find views - quiz state
         tvQuestion = findViewById(R.id.tv_questionContent)
         tvQuestionNumber = findViewById(R.id.tv_questionNumber)
+        tvQuizStateMaxQuestion = findViewById(R.id.tv_QuizStateMaxQuestions)
         btnAnswer1 = findViewById(R.id.btn_answer1)
         btnAnswer2 = findViewById(R.id.btn_answer2)
         btnAnswer3 = findViewById(R.id.btn_answer3)
         btnAnswer4 = findViewById(R.id.btn_answer4)
-
+        //find views - timer
         timeRemainingSec = findViewById(R.id.tv_timeRemainingSec)
         pbTime = findViewById(R.id.pb_timer)
+        //find views - result answer
         tvGoodOrBadAnswer = findViewById(R.id.tv_goodOrBadAnswer)
         tvScoreEvolution = findViewById(R.id.tv_scoreEvolution)
         tvQuestionExplanation = findViewById(R.id.tv_questionExplanation)
         btnNextQuestion = findViewById(R.id.btn_nextQuestion)
+        //find views - result quiz
+        tvQuizResultMaxQuestions = findViewById(R.id.tv_resultQuizMaxQuestions)
 
         //setListeners
         btnAnswer1.setOnClickListener(this)
@@ -88,15 +96,16 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         //init content
         tvTitle.text = getString(R.string.quiz)
         tvSubTitle.text = quiz.params.themes[0].theme_name
+        tvQuizStateMaxQuestion.text = getString(R.string.questionNumberMax, quiz.nbQuestions)
     }
 
-    private fun verifyIfGoodAnswer(btnText : CharSequence) {
+    private fun verifyIfGoodAnswer(btnAnswerText: CharSequence) {
         val goodAnswer = quiz.questions[questionIndex].quest_answer1
         val isGoodAnswer: Boolean
 
-        when (btnText) {
-            goodAnswer -> isGoodAnswer = true
-            else -> isGoodAnswer = false
+        isGoodAnswer = when (btnAnswerText) {
+            goodAnswer -> true
+            else -> false
         }
         showQuestionResult(isGoodAnswer)
     }
@@ -112,10 +121,10 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
 
         if(isGoodAnswer) {
             tvGoodOrBadAnswer.text = getString(R.string.goodAnswer)
-            tvScoreEvolution.text = "+ 5 points !"
+            tvScoreEvolution.text = getString(R.string.scoreEvolution, 5)
         } else {
             tvGoodOrBadAnswer.text = getString(R.string.badAnswer)
-            tvScoreEvolution.text = getString(R.string.scoreEvolution)
+            tvScoreEvolution.text = getString(R.string.scoreEvolution0)
         }
         tvQuestionExplanation.text = quiz.questions[questionIndex].quest_explanation
     }
@@ -131,18 +140,19 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
             btnAnswer4 -> verifyIfGoodAnswer(btnAnswer4.text)
             //change question when user click on this question
             btnNextQuestion -> {
-                if(questionIndex < quiz.questions.size - 1) {
+                if (questionIndex < quiz.questions.size - 1) {
                     questionIndex++
                     layoutBtnAnswers.visibility = VISIBLE
                     layoutTimer.visibility = VISIBLE
                     layoutResultAnswer.visibility = GONE
                     displayAQuestion(quiz.questions[questionIndex])
-                }
-                else {
+                } else {
                     layoutQuizState.visibility = GONE
                     layoutResultAnswer.visibility = GONE
                     layoutResultQuiz.visibility = VISIBLE
+                    tvQuizResultMaxQuestions.text = getString(R.string.questionNumberMax, quiz.nbQuestions)
                     Log.w(AppConst.TAG_CONTROLLER, "Quiz is over!")
+
 
                 }
             }
