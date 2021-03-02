@@ -1,5 +1,6 @@
 package com.wisefox.spaceodysseyapp.controller.quiz
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -12,6 +13,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.wisefox.spaceodysseyapp.R
+import com.wisefox.spaceodysseyapp.controller.MainActivity
 import com.wisefox.spaceodysseyapp.model.AppConst
 import com.wisefox.spaceodysseyapp.model.Question
 import com.wisefox.spaceodysseyapp.model.Quiz
@@ -44,6 +46,9 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvQuestionExplanation: TextView
     private lateinit var btnNextQuestion: Button
     private lateinit var tvQuizResultMaxQuestions: TextView
+    private lateinit var btnNewGame: Button
+    private lateinit var btnScoreBoard: Button
+    private lateinit var btnMainMenu: Button
 
     //Data
     private lateinit var quiz : Quiz
@@ -96,6 +101,9 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         btnNextQuestion = findViewById(R.id.btn_nextQuestion)
         //find views - result quiz
         tvQuizResultMaxQuestions = findViewById(R.id.tv_resultQuizMaxQuestions)
+        btnNewGame = findViewById(R.id.btn_resultQuizNewGame)
+        btnScoreBoard = findViewById(R.id.btn_resultQuizScoreBoard)
+        btnMainMenu = findViewById(R.id.btn_resultQuizMainMenu)
 
         //setListeners
         btnAnswer1.setOnClickListener(this)
@@ -103,6 +111,9 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         btnAnswer3.setOnClickListener(this)
         btnAnswer4.setOnClickListener(this)
         btnNextQuestion.setOnClickListener(this)
+        btnNewGame.setOnClickListener(this)
+        btnScoreBoard.setOnClickListener(this)
+        btnMainMenu.setOnClickListener(this)
 
         //init content
         tvTitle.text = getString(R.string.quiz)
@@ -112,11 +123,40 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         tvTimeRemainingSec.text = quiz.time.toString()
     }
 
+    /** display the content of a question : the question itself, this number in question list and it's possible answers
+     *
+     * @param[question] this method take the question to display as param
+     * **/
+    private fun displayAQuestion(question: Question) {
+        tvQuestion.text = question.quest_content
+        tvQuestionNumber.text = (questionIndex + 1).toString()
+        btnAnswer1.text = question.quest_answer1
+        btnAnswer2.text = question.quest_answer2
+        btnAnswer3.text = question.quest_answer3
+        btnAnswer4.text = question.quest_answer4
+        launchTimer()
+    }
+
+    /* *******************
+    --ON CLICK MANAGEMENT--
+    ********************* */
+    override fun onClick(v: View?) {
+        when(v) {
+            btnAnswer1 -> verifyIfGoodAnswer(btnAnswer1.text)
+            btnAnswer2 -> verifyIfGoodAnswer(btnAnswer2.text)
+            btnAnswer3 -> verifyIfGoodAnswer(btnAnswer3.text)
+            btnAnswer4 -> verifyIfGoodAnswer(btnAnswer4.text)
+            btnNextQuestion -> goToNextQuestion()
+            btnNewGame -> goToSetUpQuiz()
+            btnScoreBoard -> goToScoreBoard()
+            btnMainMenu -> goToMainMenu()
+        }
+    }
+
     private fun verifyIfGoodAnswer(btnAnswerText: CharSequence) {
         val goodAnswer = quiz.questions[questionIndex].quest_answer1
         val isGoodAnswer: Boolean
         stopTimer()
-
         isGoodAnswer = when (btnAnswerText) {
             goodAnswer -> true
             else -> false
@@ -144,32 +184,22 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    /** display the content of a question : the question itself, this number in question list and it's possible answers
-     *
-     * @param[question] this method take the question to display as param
-     * **/
-    private fun displayAQuestion(question: Question) {
-        tvQuestion.text = question.quest_content
-        tvQuestionNumber.text = (questionIndex + 1).toString()
-        btnAnswer1.text = question.quest_answer1
-        btnAnswer2.text = question.quest_answer2
-        btnAnswer3.text = question.quest_answer3
-        btnAnswer4.text = question.quest_answer4
-        launchTimer()
+    private  fun goToSetUpQuiz() {
+        val intentSetUpQuizActivity = Intent(this, SetUpQuizActivity::class.java)
+        startActivity(intentSetUpQuizActivity)
+        finish()
     }
 
-    /* *******************
-    --ON CLICK MANAGEMENT--
-    ********************* */
-    override fun onClick(v: View?) {
-        when(v) {
-            btnAnswer1 -> verifyIfGoodAnswer(btnAnswer1.text)
-            btnAnswer2 -> verifyIfGoodAnswer(btnAnswer2.text)
-            btnAnswer3 -> verifyIfGoodAnswer(btnAnswer3.text)
-            btnAnswer4 -> verifyIfGoodAnswer(btnAnswer4.text)
-            btnNextQuestion -> goToNextQuestion()
-        }
+    private fun goToScoreBoard() {
+        //todo: implement scoreBoard
     }
+
+    private fun goToMainMenu() {
+        val intentMainActivity = Intent(this, MainActivity::class.java)
+        startActivity(intentMainActivity)
+        finish()
+    }
+
 
     /* *******************
     --Timer management--
@@ -243,6 +273,5 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         tvQuestionExplanation.text = quiz.questions[questionIndex].quest_explanation
     }
 
-    //todo: implement callbacks for resultQuizBtns
     //todo: update score
 }
