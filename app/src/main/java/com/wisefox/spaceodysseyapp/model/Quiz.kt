@@ -8,7 +8,7 @@ class Quiz (
         val nbQuestions: Int = questions.size,
         var nbGoodAnswer: Int = 0,
         var score: Int = 0,
-        val time : Double = 10.0
+        val time : Int = 10
         ) : Serializable {
                 fun incrementNbGoodAnswers() {
                         this.nbGoodAnswer++
