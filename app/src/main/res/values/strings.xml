@@ -33,6 +33,7 @@
     <string name="answerBad">Mauvaise réponse…</string>
     <string name="answerGood">Bonne réponse</string>
     <string name="answersGood">bonnes réponses</string>
+    <string name="answersNbGoodAnswers">%1$d / %2$d</string>
     <string name="answerNonExistent">Temps écoulé !</string>
     <string name="defaultNumber">0</string>
     <string name="explanation">La réponse correcte est que .... en effet ... C\'est ici qu\'est expliqué de manière concise la réponse à la question posée pour que l\'utilisateur puisse s\'instruire</string>
@@ -42,10 +43,10 @@
     <string name="questionNumber">Question n° </string>
     <string name="questionNumberMax">/ %1$d</string>
     <string name="result">Résultat :</string>
-    <string name="scoreEvolution0">0 point…</string>
+    <string name="scoreEvolution0">0 point …</string>
     <string name="scoreEvolution">+ %1$d points</string>
     <string name="sec">10 sec</string>
-    <string name="score">Score : </string>
+    <string name="score">Score : %1$d</string>
     <string name="timeRemain">Temps restant : </string>
 
 
@@ -53,8 +54,8 @@
     <string name="warningNotLogged">Tu n\'es pas connecté, tes résultats ne pourront être sauvegardés…</string>
 
     <!-- error messages -->
-    <string name="errorLackOfQuestions">Nous n\'avons pas suffisamment de questions pour ces paramètres… nous t\'invitons à les changer.</string>
-    <string name="errorGeneric">Oups ! Un problème est survenu, nous t\'invitons à réessayer plus tard…</string>
+    <string name="errorLackOfQuestions">Nous n\'avons pas suffisamment de questions pour ces paramètres … nous t\'invitons à les changer.</string>
+    <string name="errorGeneric">Oups ! Un problème est survenu, nous t\'invitons à réessayer plus tard …</string>
 
 </resources>
 
