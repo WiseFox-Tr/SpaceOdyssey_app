@@ -1,6 +1,7 @@
 package com.wisefox.spaceodysseyapp.controller.quiz
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.view.View.GONE
@@ -18,6 +19,8 @@ import com.wisefox.spaceodysseyapp.model.Quiz
 
 class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
 
+    enum class TimerState { Stopped, Running, Over }
+
     //layout elements
     private lateinit var layoutBtnAnswers: LinearLayout
     private lateinit var layoutTimer: LinearLayout
@@ -34,7 +37,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var btnAnswer2: Button
     private lateinit var btnAnswer3: Button
     private lateinit var btnAnswer4: Button
-    private lateinit var timeRemainingSec: TextView
+    private lateinit var tvTimeRemainingSec: TextView
     private lateinit var pbTime: ProgressBar
     private lateinit var tvGoodOrBadAnswer: TextView
     private lateinit var tvScoreEvolution: TextView
@@ -45,18 +48,26 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     //Data
     private lateinit var quiz : Quiz
 
-    //utils
+    //question index
     private var questionIndex = 0
+
+    //timer management
+    private lateinit var timer : CountDownTimer
+    private var timerState = TimerState.Stopped
+    private var remainingSeconds = 0
+    private var pbProgressValue = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_quiz)
         quiz = intent.getSerializableExtra("quiz") as Quiz
         initialConfiguration()
+        initTimer()
         displayAQuestion(quiz.questions[0])
     }
 
-    /** this method find views by id, set on click listeners and init initial content independently of question played. **/
+    /** this method find views by id, set on click listeners and init initial content independently of question played.
+     * It also stop the current timer **/
     private fun initialConfiguration() {
         //find views - layout
         layoutBtnAnswers = findViewById(R.id.layout_btnAnswers)
@@ -76,7 +87,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         btnAnswer3 = findViewById(R.id.btn_answer3)
         btnAnswer4 = findViewById(R.id.btn_answer4)
         //find views - timer
-        timeRemainingSec = findViewById(R.id.tv_timeRemainingSec)
+        tvTimeRemainingSec = findViewById(R.id.tv_timeRemainingSec)
         pbTime = findViewById(R.id.pb_timer)
         //find views - result answer
         tvGoodOrBadAnswer = findViewById(R.id.tv_goodOrBadAnswer)
@@ -97,40 +108,27 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         tvTitle.text = getString(R.string.quiz)
         tvSubTitle.text = quiz.params.themes[0].theme_name
         tvQuizStateMaxQuestion.text = getString(R.string.questionNumberMax, quiz.nbQuestions)
+        remainingSeconds = quiz.time
+        tvTimeRemainingSec.text = quiz.time.toString()
     }
 
     private fun verifyIfGoodAnswer(btnAnswerText: CharSequence) {
         val goodAnswer = quiz.questions[questionIndex].quest_answer1
         val isGoodAnswer: Boolean
+        stopTimer()
 
         isGoodAnswer = when (btnAnswerText) {
             goodAnswer -> true
             else -> false
         }
-        showQuestionResult(isGoodAnswer)
-    }
-
-    /** this method hides answerBtn & Timer and show result content
-     *
-     * @param[isGoodAnswer] it takes a boolean as params
-     * **/
-    private fun showQuestionResult(isGoodAnswer: Boolean) {
-        layoutBtnAnswers.visibility = GONE
-        layoutTimer.visibility = GONE
-        layoutResultAnswer.visibility = VISIBLE
-
-        if(isGoodAnswer) {
-            tvGoodOrBadAnswer.text = getString(R.string.goodAnswer)
-            tvScoreEvolution.text = getString(R.string.scoreEvolution, 5)
-        } else {
-            tvGoodOrBadAnswer.text = getString(R.string.badAnswer)
-            tvScoreEvolution.text = getString(R.string.scoreEvolution0)
-        }
-        tvQuestionExplanation.text = quiz.questions[questionIndex].quest_explanation
+        uiShowQuestionResult(isGoodAnswer)
     }
 
     //change question when user click on this question
     private fun goToNextQuestion() {
+        pbProgressValue = 0
+        uiUpdateTimeProgressBar()
+
         if (questionIndex < quiz.questions.size - 1) {
             questionIndex++
             layoutBtnAnswers.visibility = VISIBLE
@@ -157,11 +155,12 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         btnAnswer2.text = question.quest_answer2
         btnAnswer3.text = question.quest_answer3
         btnAnswer4.text = question.quest_answer4
+        launchTimer()
     }
 
     /* *******************
---ON CLICK MANAGEMENT--
-********************* */
+    --ON CLICK MANAGEMENT--
+    ********************* */
     override fun onClick(v: View?) {
         when(v) {
             btnAnswer1 -> verifyIfGoodAnswer(btnAnswer1.text)
@@ -172,8 +171,78 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /* *******************
+    --Timer management--
+    ********************* */
+
+    /**
+     * init timer object with a duration of quiz.time.toLong() * 1000 milliseconds  and intervals of 100 milliseconds...
+     * onTick method add +1 to progress bar value & display remaining seconds + 1 sec (to avoid to display a 0 sec remaining time)
+     * **/
+    private fun initTimer() {
+        timer = object : CountDownTimer(quiz.time.toLong() * 1000, 100) {
+            override fun onFinish() {
+                timerState = TimerState.Over
+                uiShowQuestionResult(false)
+            }
+            override fun onTick(millisUntilFinished: Long) {
+                remainingSeconds = (millisUntilFinished / 1000 + 1).toInt()
+                pbProgressValue++
+                uiUpdateTimeProgressBar()
+            }
+        }
+    }
+
+    private fun launchTimer() {
+        timer.start()
+        timerState = TimerState.Running
+    }
+
+    private fun stopTimer() {
+        timer.cancel()
+        timerState = TimerState.Stopped
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if(timerState == TimerState.Running) {
+            timer.cancel()
+            timerState = TimerState.Stopped
+        }
+    }
+
+    /* *******************
+         --UI Updates --
+    ********************* */
+
+    /** Update UI with current remainingSeconds & progress value for pb */
+    private fun uiUpdateTimeProgressBar() {
+        pbTime.progress = pbProgressValue
+        tvTimeRemainingSec.text = remainingSeconds.toString()
+    }
+
+    /** Update UI by hiding answerBtn & Timer and showing result contents
+     * @param[isGoodAnswer] a boolean to indicate if user answer well or not
+     * If answer provided is wrong & timer is over, a specific message is displayed
+     * **/
+    private fun uiShowQuestionResult(isGoodAnswer: Boolean) {
+        layoutBtnAnswers.visibility = GONE
+        layoutTimer.visibility = GONE
+        layoutResultAnswer.visibility = VISIBLE
+
+        if(isGoodAnswer) {
+            tvGoodOrBadAnswer.text = getString(R.string.answerGood)
+            tvScoreEvolution.text = getString(R.string.scoreEvolution, 5)
+        } else {
+            tvScoreEvolution.text = getString(R.string.scoreEvolution0)
+            if(timerState == TimerState.Over)
+                tvGoodOrBadAnswer.text = getString(R.string.answerNonExistent)
+            else
+                tvGoodOrBadAnswer.text = getString(R.string.answerBad)
+        }
+        tvQuestionExplanation.text = quiz.questions[questionIndex].quest_explanation
+    }
+
     //todo: implement callbacks for resultQuizBtns
     //todo: update score
-    //todo: set timer & progress bar
 }
-
