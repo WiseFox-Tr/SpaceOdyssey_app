@@ -32,6 +32,7 @@ class QuizActivity : AppCompatActivity() {
 
     fun onClickSetUpQuiz(view: View) {
         val intentSetUpQuizActivity = Intent(this, SetUpQuizActivity::class.java)
-        startActivity(intentSetUpQuizActivity);
+        startActivity(intentSetUpQuizActivity)
+        finish()
     }
 }

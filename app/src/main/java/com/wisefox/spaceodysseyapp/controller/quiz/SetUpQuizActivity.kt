@@ -63,6 +63,7 @@ class SetUpQuizActivity : AppCompatActivity() {
                 intentPlayQuizActivity.putExtra("quiz", quiz)
 
                 startActivity(intentPlayQuizActivity)
+                finish()
             }
             catch (e: Exception) {
                 e.printStackTrace()
