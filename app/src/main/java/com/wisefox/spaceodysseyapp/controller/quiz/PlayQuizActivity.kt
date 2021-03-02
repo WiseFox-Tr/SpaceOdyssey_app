@@ -32,6 +32,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     // Graphics
     private lateinit var tvTitle: TextView
     private lateinit var tvSubTitle: TextView
+    private lateinit var tvQuizStateCurrentScore: TextView
     private lateinit var tvQuestion: TextView
     private lateinit var tvQuestionNumber: TextView
     private lateinit var tvQuizStateMaxQuestion: TextView
@@ -45,7 +46,8 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvScoreEvolution: TextView
     private lateinit var tvQuestionExplanation: TextView
     private lateinit var btnNextQuestion: Button
-    private lateinit var tvQuizResultMaxQuestions: TextView
+    private lateinit var tvQuizResultCurrentScore: TextView
+    private lateinit var tvResultQuizGoodAnswers: TextView
     private lateinit var btnNewGame: Button
     private lateinit var btnScoreBoard: Button
     private lateinit var btnMainMenu: Button
@@ -56,7 +58,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     //question index
     private var questionIndex = 0
 
-    //timer management
+    //time management
     private lateinit var timer : CountDownTimer
     private var timerState = TimerState.Stopped
     private var remainingSeconds = 0
@@ -68,7 +70,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         quiz = intent.getSerializableExtra("quiz") as Quiz
         initialConfiguration()
         initTimer()
-        displayAQuestion(quiz.questions[0])
+        uiDisplayAQuestion(quiz.questions[0])
     }
 
     /** this method find views by id, set on click listeners and init initial content independently of question played.
@@ -84,6 +86,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         tvTitle = findViewById(R.id.tv_title)
         tvSubTitle = findViewById(R.id.tv_subTitle)
         //find views - quiz state
+        tvQuizStateCurrentScore = findViewById(R.id.tv_QuizStateCurrentScore)
         tvQuestion = findViewById(R.id.tv_questionContent)
         tvQuestionNumber = findViewById(R.id.tv_questionNumber)
         tvQuizStateMaxQuestion = findViewById(R.id.tv_QuizStateMaxQuestions)
@@ -100,7 +103,8 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         tvQuestionExplanation = findViewById(R.id.tv_questionExplanation)
         btnNextQuestion = findViewById(R.id.btn_nextQuestion)
         //find views - result quiz
-        tvQuizResultMaxQuestions = findViewById(R.id.tv_resultQuizMaxQuestions)
+        tvQuizResultCurrentScore = findViewById(R.id.tv_resultQuizCurrentScore)
+        tvResultQuizGoodAnswers = findViewById(R.id.tv_resultQuizGoodAnswers)
         btnNewGame = findViewById(R.id.btn_resultQuizNewGame)
         btnScoreBoard = findViewById(R.id.btn_resultQuizScoreBoard)
         btnMainMenu = findViewById(R.id.btn_resultQuizMainMenu)
@@ -116,26 +120,23 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         btnMainMenu.setOnClickListener(this)
 
         //init content
-        tvTitle.text = getString(R.string.quiz)
-        tvSubTitle.text = quiz.params.themes[0].theme_name
-        tvQuizStateMaxQuestion.text = getString(R.string.questionNumberMax, quiz.nbQuestions)
-        remainingSeconds = quiz.time
-        tvTimeRemainingSec.text = quiz.time.toString()
+        uiDisplayInitialContent()
     }
 
-    /** display the content of a question : the question itself, this number in question list and it's possible answers
-     *
-     * @param[question] this method take the question to display as param
-     * **/
-    private fun displayAQuestion(question: Question) {
-        tvQuestion.text = question.quest_content
-        tvQuestionNumber.text = (questionIndex + 1).toString()
-        btnAnswer1.text = question.quest_answer1
-        btnAnswer2.text = question.quest_answer2
-        btnAnswer3.text = question.quest_answer3
-        btnAnswer4.text = question.quest_answer4
-        launchTimer()
+    private fun calculateScore(): Int {
+        var currentMultiplier = 0
+
+        when {
+            quiz.params.levels[0].lvl_id.toInt() == 1 -> currentMultiplier = AppConst.scoreMultiplierEasy
+            quiz.params.levels[0].lvl_id.toInt() == 2 -> currentMultiplier = AppConst.scoreMultiplierMedium
+            quiz.params.levels[0].lvl_id.toInt() == 3 -> currentMultiplier = AppConst.scoreMultiplierConfirmed
+        }
+        val currentAnswerScore = currentMultiplier * (remainingSeconds)
+        quiz.score += currentAnswerScore
+        Log.v(AppConst.TAG_CONTROLLER, "Remaining sec: $remainingSeconds - current multiplier : $currentMultiplier --> score : $currentAnswerScore")
+        return currentAnswerScore
     }
+
 
     /* *******************
     --ON CLICK MANAGEMENT--
@@ -156,12 +157,18 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     private fun verifyIfGoodAnswer(btnAnswerText: CharSequence) {
         val goodAnswer = quiz.questions[questionIndex].quest_answer1
         val isGoodAnswer: Boolean
+        var currentAnswerScore = 0
         stopTimer()
-        isGoodAnswer = when (btnAnswerText) {
-            goodAnswer -> true
-            else -> false
+
+        when (btnAnswerText) {
+            goodAnswer -> {
+                isGoodAnswer = true
+                quiz.nbGoodAnswer++
+                currentAnswerScore = calculateScore()
+            }
+            else -> isGoodAnswer = false
         }
-        uiShowQuestionResult(isGoodAnswer)
+        uiShowQuestionResult(isGoodAnswer, currentAnswerScore)
     }
 
     //change question when user click on this question
@@ -174,14 +181,9 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
             layoutBtnAnswers.visibility = VISIBLE
             layoutTimer.visibility = VISIBLE
             layoutResultAnswer.visibility = GONE
-            displayAQuestion(quiz.questions[questionIndex])
-        } else {
-            layoutQuizState.visibility = GONE
-            layoutResultAnswer.visibility = GONE
-            layoutResultQuiz.visibility = VISIBLE
-            tvQuizResultMaxQuestions.text = getString(R.string.questionNumberMax, quiz.nbQuestions)
-            Log.w(AppConst.TAG_CONTROLLER, "Quiz is over!")
-        }
+            uiDisplayAQuestion(quiz.questions[questionIndex])
+        } else
+            uiDisplayResultQuiz()
     }
 
     private  fun goToSetUpQuiz() {
@@ -213,7 +215,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         timer = object : CountDownTimer(quiz.time.toLong() * 1000, 100) {
             override fun onFinish() {
                 timerState = TimerState.Over
-                uiShowQuestionResult(false)
+                uiShowQuestionResult(false, 0)
             }
             override fun onTick(millisUntilFinished: Long) {
                 remainingSeconds = (millisUntilFinished / 1000 + 1).toInt()
@@ -242,8 +244,31 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     /* *******************
-         --UI Updates --
+         --Updates --
     ********************* */
+
+    private fun uiDisplayInitialContent() {
+        tvTitle.text = getString(R.string.quiz)
+        tvSubTitle.text = quiz.params.themes[0].theme_name
+        tvQuizStateCurrentScore.text = getString(R.string.score, 0)
+        tvQuizStateMaxQuestion.text = getString(R.string.questionNumberMax, quiz.nbQuestions)
+        remainingSeconds = quiz.time
+        tvTimeRemainingSec.text = quiz.time.toString()
+    }
+
+    /** display the content of a question : the question itself, this number in question list and it's possible answers
+     *
+     * @param[question] this method take the question to display as param
+     * **/
+    private fun uiDisplayAQuestion(question: Question) {
+        tvQuestion.text = question.quest_content
+        tvQuestionNumber.text = (questionIndex + 1).toString()
+        btnAnswer1.text = question.quest_answer1
+        btnAnswer2.text = question.quest_answer2
+        btnAnswer3.text = question.quest_answer3
+        btnAnswer4.text = question.quest_answer4
+        launchTimer()
+    }
 
     /** Update UI with current remainingSeconds & progress value for pb */
     private fun uiUpdateTimeProgressBar() {
@@ -253,16 +278,18 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
 
     /** Update UI by hiding answerBtn & Timer and showing result contents
      * @param[isGoodAnswer] a boolean to indicate if user answer well or not
+     * @param[currentAnswerScore] score gained by user when he responded well
      * If answer provided is wrong & timer is over, a specific message is displayed
      * **/
-    private fun uiShowQuestionResult(isGoodAnswer: Boolean) {
+    private fun uiShowQuestionResult(isGoodAnswer: Boolean, currentAnswerScore: Int) {
         layoutBtnAnswers.visibility = GONE
         layoutTimer.visibility = GONE
         layoutResultAnswer.visibility = VISIBLE
 
         if(isGoodAnswer) {
+            tvQuizStateCurrentScore.text = getString(R.string.score, quiz.score)
             tvGoodOrBadAnswer.text = getString(R.string.answerGood)
-            tvScoreEvolution.text = getString(R.string.scoreEvolution, 5)
+            tvScoreEvolution.text = getString(R.string.scoreEvolution, currentAnswerScore)
         } else {
             tvScoreEvolution.text = getString(R.string.scoreEvolution0)
             if(timerState == TimerState.Over)
@@ -273,5 +300,14 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         tvQuestionExplanation.text = quiz.questions[questionIndex].quest_explanation
     }
 
-    //todo: update score
+    private fun uiDisplayResultQuiz() {
+        layoutQuizState.visibility = GONE
+        layoutResultAnswer.visibility = GONE
+        layoutResultQuiz.visibility = VISIBLE
+        tvQuizResultCurrentScore.text = quiz.score.toString()
+        tvResultQuizGoodAnswers.text = getString(R.string.answersNbGoodAnswers,quiz.nbGoodAnswer, quiz.nbQuestions)
+        Log.w(AppConst.TAG_CONTROLLER, "Quiz is over!")
+    }
+
+    //todo: randomise answers btn
 }
