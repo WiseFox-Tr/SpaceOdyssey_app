@@ -30,11 +30,12 @@
     <string name="planetSystems">Systèmes planétaires</string>
 
     <!-- play a quiz Screen-->
-    <string name="badAnswer">Mauvaise réponse</string>
+    <string name="answerBad">Mauvaise réponse…</string>
+    <string name="answerGood">Bonne réponse</string>
+    <string name="answersGood">bonnes réponses</string>
+    <string name="answerNonExistent">Temps écoulé !</string>
     <string name="defaultNumber">0</string>
     <string name="explanation">La réponse correcte est que .... en effet ... C\'est ici qu\'est expliqué de manière concise la réponse à la question posée pour que l\'utilisateur puisse s\'instruire</string>
-    <string name="goodAnswer">Bonne réponse</string>
-    <string name="goodAnswers">bonnes réponses</string>
     <string name="next">Suivant</string>
     <string name="newGame">Nouvelle partie</string>
     <string name="questionByDefault">Ceci est il une question par défaut ?</string>
