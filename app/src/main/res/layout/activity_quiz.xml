@@ -18,7 +18,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.85"
+        android:layout_weight="0.3"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingTop="20dp">
@@ -40,4 +40,19 @@
             android:text="@string/scoreboard" />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pb_quizLoadPB"
+        style="@android:style/Widget.Material.Light.ProgressBar"
+        android:layout_weight="0.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:indeterminateBehavior="repeat"
+        android:indeterminateTint="@color/text_yellow_orange"
+        android:minWidth="50dp"
+        android:progress="70"
+        android:visibility="invisible"
+        tools:visibility="visible" />
+
 </LinearLayout>
