@@ -3,6 +3,9 @@ package com.wisefox.spaceodysseyapp.controller.quiz
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.wisefox.spaceodysseyapp.R
@@ -21,6 +24,7 @@ class SetUpQuizActivity : AppCompatActivity() {
     private lateinit var tvTitle: TextView
     private lateinit var tvSubTitle: TextView
     private lateinit var rootView: View
+    private lateinit var pbLoad: ProgressBar
 
     //data
     private var levelChosen = Level(1, "Débutant")
@@ -44,6 +48,7 @@ class SetUpQuizActivity : AppCompatActivity() {
         tvTitle = findViewById(R.id.tv_title)
         tvSubTitle = findViewById(R.id.tv_subTitle)
         rootView = findViewById(R.id.root_setUp)
+        pbLoad = findViewById(R.id.pb_setUpQuizLoadPB)
 
         //init content
         tvTitle.text = getString(R.string.quiz)
@@ -52,6 +57,7 @@ class SetUpQuizActivity : AppCompatActivity() {
 
     fun onClickPlayQuiz(view: View) {
 
+        pbLoad.visibility = VISIBLE
         CoroutineScope(IO).launch {
             //request for questions & start PlayQuizActivity with questionsList retrieved from server
             try {
@@ -68,6 +74,7 @@ class SetUpQuizActivity : AppCompatActivity() {
             catch (e: Exception) {
                 e.printStackTrace()
                 launch(Main) {
+                    pbLoad.visibility = INVISIBLE
                     CommonController.displaySnackbar(
                             rootView = rootView,
                             message = CommonController.manageError(exception = e, context = this@SetUpQuizActivity),

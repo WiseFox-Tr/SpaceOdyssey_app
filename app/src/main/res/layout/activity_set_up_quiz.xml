@@ -59,6 +59,19 @@
             android:text="@string/easy"
             android:textSize="18sp" />
 
+        <ProgressBar
+            android:id="@+id/pb_setUpQuizLoadPB"
+            style="@android:style/Widget.Material.Light.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateTint="@color/text_yellow_orange"
+            android:minWidth="50dp"
+            android:progress="70"
+            android:visibility="invisible"
+            tools:visibility="visible" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -91,5 +104,4 @@
             tools:visibility="visible" />
 
     </LinearLayout>
-
 </LinearLayout>
