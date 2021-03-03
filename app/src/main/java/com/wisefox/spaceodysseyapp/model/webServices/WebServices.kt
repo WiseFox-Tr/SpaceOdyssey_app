@@ -15,6 +15,8 @@ class WebServices {
         private var jsonToSend = ""
         private var jsonReceived = ""
 
+        /** it returns all params from server & db
+         * @return[Params] */
         fun getParams(): Params {
             jsonReceived = OkHttp.sendGetOkHttpRequest(AppConst.URL_API_GET_PARAMS)
 
@@ -25,14 +27,13 @@ class WebServices {
             when {
                 responseCodeBean.code != 200 -> throw Exception("error ${responseCodeBean.code} : ${responseCodeBean.message}")
                 responseCodeBean.data == null -> throw Exception("No content in data")
-                else -> return responseCodeBean.data //List<QuestionBean>
+                else -> return responseCodeBean.data //Params
             }
-
         }
 
-        //method getQuestions --> send params to server (theme & level) and retrieve a list of questions
+        /** it sends params to server (theme & level) and returns a list of questions corresponding to params sent from server & db
+         * @return[List] -> of QuestionBean */
         fun getQuestions(params: Params): List<Question> {
-
             jsonToSend = gson.toJson(params)
             jsonReceived = OkHttp.sendPostOkHttpRequest(AppConst.URL_API_GET_QUESTIONS, jsonToSend)
 
