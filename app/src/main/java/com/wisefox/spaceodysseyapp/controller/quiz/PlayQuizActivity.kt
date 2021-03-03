@@ -268,9 +268,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
          --Updates --
     ********************* */
 
-    /** it displays first elements of screen (title, sub title, score, nb questions
-     *
-     */
+    /** it displays first elements of screen (title, sub title, score, nb questions, time remaining **/
     private fun uiDisplayInitialContent() {
         tvTitle.text = getString(R.string.quiz)
         tvSubTitle.text = quiz.params.themes[0].theme_name
