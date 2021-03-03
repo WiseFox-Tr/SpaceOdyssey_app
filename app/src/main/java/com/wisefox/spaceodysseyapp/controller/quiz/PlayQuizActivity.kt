@@ -119,24 +119,38 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         btnScoreBoard.setOnClickListener(this)
         btnMainMenu.setOnClickListener(this)
 
-        //init content
+        //init content & values
         uiDisplayInitialContent()
+        remainingSeconds = quiz.time
     }
 
+    /** it looks the level of the quiz and set up a multiplier for score depending of this level.
+     *  remaining seconds is multiplied by the multiplier and quiz score is updated.
+     *  Current score is returned
+     * @return[Int] **/
     private fun calculateScore(): Int {
         var currentMultiplier = 0
-
         when {
             quiz.params.levels[0].lvl_id.toInt() == 1 -> currentMultiplier = AppConst.scoreMultiplierEasy
             quiz.params.levels[0].lvl_id.toInt() == 2 -> currentMultiplier = AppConst.scoreMultiplierMedium
             quiz.params.levels[0].lvl_id.toInt() == 3 -> currentMultiplier = AppConst.scoreMultiplierConfirmed
         }
         val currentAnswerScore = currentMultiplier * (remainingSeconds)
-        quiz.score += currentAnswerScore
+        quiz.updateScore(currentAnswerScore)
         Log.v(AppConst.TAG_CONTROLLER, "Remaining sec: $remainingSeconds - current multiplier : $currentMultiplier --> score : $currentAnswerScore")
         return currentAnswerScore
     }
 
+    /** it creates an ArrayList that containing all answers, mixed up them and it returns a List
+     * @return [List<String>] -> A list of String **/
+    private fun randomizeAnswers(): List<String> {
+        val answers = ArrayList<String>()
+        answers.add(quiz.questions[questionIndex].quest_answer1)
+        answers.add(quiz.questions[questionIndex].quest_answer2)
+        quiz.questions[questionIndex].quest_answer3?.let { answers.add(it) }
+        quiz.questions[questionIndex].quest_answer4?.let { answers.add(it) }
+        return answers.shuffled()
+    }
 
     /* *******************
     --ON CLICK MANAGEMENT--
@@ -154,6 +168,13 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /** it takes as param the text from btn clicked and compares it with the text of good answers.
+     * If it is equal -> this is the good answer : it calls method to calculate score gained & update good answers number
+     *
+     * else -> this is a failure
+     *
+     * In all cases, it calls method to show question result
+     * @param[btnAnswerText] -> text of the button clicked **/
     private fun verifyIfGoodAnswer(btnAnswerText: CharSequence) {
         val goodAnswer = quiz.questions[questionIndex].quest_answer1
         val isGoodAnswer: Boolean
@@ -163,7 +184,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         when (btnAnswerText) {
             goodAnswer -> {
                 isGoodAnswer = true
-                quiz.nbGoodAnswer++
+                quiz.incrementNbGoodAnswers()
                 currentAnswerScore = calculateScore()
             }
             else -> isGoodAnswer = false
@@ -171,7 +192,8 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         uiShowQuestionResult(isGoodAnswer, currentAnswerScore)
     }
 
-    //change question when user click on this question
+    /** Reinitialize progress bar & if it wasn't the last question, it calls method to display next question
+     * else, it calls method to display quiz result **/
     private fun goToNextQuestion() {
         pbProgressValue = 0
         uiUpdateTimeProgressBar()
@@ -207,8 +229,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     --Timer management--
     ********************* */
 
-    /**
-     * init timer object with a duration of quiz.time.toLong() * 1000 milliseconds  and intervals of 100 milliseconds...
+    /** init timer object with a duration of quiz.time.toLong() * 1000 milliseconds  and intervals of 100 milliseconds...
      * onTick method add +1 to progress bar value & display remaining seconds + 1 sec (to avoid to display a 0 sec remaining time)
      * **/
     private fun initTimer() {
@@ -247,40 +268,42 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
          --Updates --
     ********************* */
 
+    /** it displays first elements of screen (title, sub title, score, nb questions
+     *
+     */
     private fun uiDisplayInitialContent() {
         tvTitle.text = getString(R.string.quiz)
         tvSubTitle.text = quiz.params.themes[0].theme_name
         tvQuizStateCurrentScore.text = getString(R.string.score, 0)
         tvQuizStateMaxQuestion.text = getString(R.string.questionNumberMax, quiz.nbQuestions)
-        remainingSeconds = quiz.time
         tvTimeRemainingSec.text = quiz.time.toString()
     }
 
-    /** display the content of a question : the question itself, this number in question list and it's possible answers
-     *
+    /** display the content of a question : the question itself, this number in question list and it's possible answers (in answers btn).
      * @param[question] this method take the question to display as param
      * **/
     private fun uiDisplayAQuestion(question: Question) {
         tvQuestion.text = question.quest_content
         tvQuestionNumber.text = (questionIndex + 1).toString()
-        btnAnswer1.text = question.quest_answer1
-        btnAnswer2.text = question.quest_answer2
-        btnAnswer3.text = question.quest_answer3
-        btnAnswer4.text = question.quest_answer4
+
+        val answersList = randomizeAnswers()
+        btnAnswer1.text = answersList[0]
+        btnAnswer2.text = answersList[1]
+        btnAnswer3.text = answersList[2]
+        btnAnswer4.text = answersList[3]
         launchTimer()
     }
 
-    /** Update UI with current remainingSeconds & progress value for pb */
+    /** Update UI with current remainingSeconds & progress value for pb **/
     private fun uiUpdateTimeProgressBar() {
         pbTime.progress = pbProgressValue
         tvTimeRemainingSec.text = remainingSeconds.toString()
     }
 
-    /** Update UI by hiding answerBtn & Timer and showing result contents
+    /** Update UI by hiding answerBtn & Timer and showing result contents.
+     * If answer provided is wrong & timer is over, a specific message is displayed.
      * @param[isGoodAnswer] a boolean to indicate if user answer well or not
-     * @param[currentAnswerScore] score gained by user when he responded well
-     * If answer provided is wrong & timer is over, a specific message is displayed
-     * **/
+     * @param[currentAnswerScore] score gained by user when he responded well**/
     private fun uiShowQuestionResult(isGoodAnswer: Boolean, currentAnswerScore: Int) {
         layoutBtnAnswers.visibility = GONE
         layoutTimer.visibility = GONE
@@ -300,14 +323,12 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         tvQuestionExplanation.text = quiz.questions[questionIndex].quest_explanation
     }
 
+    /** it hides play quiz part screen & displays end quiz part screen **/
     private fun uiDisplayResultQuiz() {
         layoutQuizState.visibility = GONE
         layoutResultAnswer.visibility = GONE
         layoutResultQuiz.visibility = VISIBLE
         tvQuizResultCurrentScore.text = quiz.score.toString()
         tvResultQuizGoodAnswers.text = getString(R.string.answersNbGoodAnswers,quiz.nbGoodAnswer, quiz.nbQuestions)
-        Log.w(AppConst.TAG_CONTROLLER, "Quiz is over!")
     }
-
-    //todo: randomise answers btn
 }
