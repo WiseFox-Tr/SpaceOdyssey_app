@@ -8,6 +8,7 @@ class AppConst {
 
         //URL
         private const val URL_ROOT_API = "http://10.0.2.2:8080"
+        const val URL_API_GET_PARAMS = "$URL_ROOT_API/getParams"
         const val URL_API_GET_QUESTIONS = "$URL_ROOT_API/getQuestions"
 
         //score multiplier
