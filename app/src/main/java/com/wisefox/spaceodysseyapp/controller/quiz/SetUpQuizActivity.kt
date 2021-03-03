@@ -27,6 +27,7 @@ class SetUpQuizActivity : AppCompatActivity() {
     private lateinit var pbLoad: ProgressBar
 
     //data
+    private lateinit var paramsRetrieved: Params
     private var levelChosen = Level(1, "Débutant")
     private var themeChosen = Theme(1, "Systèmes planétaires")
 
@@ -40,6 +41,7 @@ class SetUpQuizActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_up_quiz)
+        paramsRetrieved = intent.getSerializableExtra("params") as Params
         findViewsAndInitContent()
     }
 
@@ -56,12 +58,10 @@ class SetUpQuizActivity : AppCompatActivity() {
     }
 
     fun onClickPlayQuiz(view: View) {
-
         pbLoad.visibility = VISIBLE
         CoroutineScope(IO).launch {
             //request for questions & start PlayQuizActivity with questionsList retrieved from server
             try {
-                //todo: update UI with a progress bar
                 val questionsList = WebServices.getQuestions(params)
                 quiz = Quiz(questionsList, params = params)
 
