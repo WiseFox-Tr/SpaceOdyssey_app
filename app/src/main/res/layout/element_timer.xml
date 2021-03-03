@@ -43,8 +43,7 @@
         android:maxWidth="300dp"
         android:minWidth="250dp"
         android:minHeight="10dp"
-        android:progress="0"
-        android:progressTint="@color/btn_yellow_orange"
+        android:progressTint="@color/text_yellow_orange"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         android:scrollbarAlwaysDrawVerticalTrack="false" />
 
