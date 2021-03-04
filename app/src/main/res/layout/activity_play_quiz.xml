@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background"
     android:padding="10dp"
     android:weightSum="1"
     tools:context=".controller.quiz.PlayQuizActivity">
@@ -12,7 +13,7 @@
         layout="@layout/element_title"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.15" />
+        android:layout_weight="0.20" />
 
     <!-- todo: find a solution to allow scrolling -->
 
@@ -20,7 +21,7 @@
         layout="@layout/element_quiz_state"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.25" />
+        android:layout_weight="0.20" />
 
     <include
         layout="@layout/element_bnt_answers"
