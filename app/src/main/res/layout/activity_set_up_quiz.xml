@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background"
     android:padding="10dp"
     android:weightSum="1"
     tools:context=".controller.quiz.SetUpQuizActivity">
@@ -13,13 +14,13 @@
         layout="@layout/element_title"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.15" />
+        android:layout_weight="0.20" />
 
     <LinearLayout
         android:id="@+id/layout_param"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.55"
+        android:layout_weight="0.50"
         android:orientation="vertical"
         android:paddingStart="40dp"
         android:paddingEnd="40dp">
@@ -31,7 +32,9 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="5dp"
             android:text="@string/theme"
-            android:textSize="18sp" />
+            android:textColor="@color/text_white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinner_theme"
@@ -49,9 +52,12 @@
             android:id="@+id/tv_spinner_level"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp"
             android:text="@string/level"
-            android:textSize="18sp" />
+            android:textColor="@color/text_white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinner_level"
@@ -82,7 +88,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.3"
+        android:layout_weight="0.30"
         android:gravity="center"
         android:orientation="vertical">
 
