@@ -35,8 +35,15 @@
 
         <Spinner
             android:id="@+id/spinner_theme"
+            style="@android:style/Widget.Material.Spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/style_spinner"
+            android:contextClickable="false"
+            android:minHeight="30dp"
+            android:popupBackground="@color/action_purple"
+            android:textColor="@color/text_white"
+            tools:listitem="@layout/spinner_item" />
 
         <TextView
             android:id="@+id/tv_spinner_level"
@@ -49,7 +56,13 @@
         <Spinner
             android:id="@+id/spinner_level"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/style_spinner"
+            android:contextClickable="false"
+            android:minHeight="30dp"
+            android:popupBackground="@color/action_purple"
+            android:textColor="@color/text_white"
+            tools:listitem="@layout/spinner_item" />
 
         <ProgressBar
             android:id="@+id/pb_setUpQuizLoadPB"
@@ -60,6 +73,7 @@
             android:indeterminateBehavior="repeat"
             android:indeterminateTint="@color/text_yellow_orange"
             android:minWidth="50dp"
+            android:layout_marginTop="20dp"
             android:progress="70"
             android:visibility="invisible"
             tools:visibility="visible" />
