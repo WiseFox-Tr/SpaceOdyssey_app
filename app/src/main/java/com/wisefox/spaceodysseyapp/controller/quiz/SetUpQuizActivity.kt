@@ -1,5 +1,6 @@
 package com.wisefox.spaceodysseyapp.controller.quiz
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,11 +8,13 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.*
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.wisefox.spaceodysseyapp.R
 import com.wisefox.spaceodysseyapp.controller.CommonController
 import com.wisefox.spaceodysseyapp.model.*
 import com.wisefox.spaceodysseyapp.model.webServices.WebServices
+import com.wisefox.spaceodysseyapp.view.CustomGraphicComponents
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -65,8 +68,8 @@ class SetUpQuizActivity : AppCompatActivity() {
         val levelList = ArrayList<String>()
         paramsRetrieved.themes.forEach { themeList.add(it.theme_name) }
         paramsRetrieved.levels.forEach { levelList.add(it.lvl_name) }
-        spinnerTheme.adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, themeList)
-        spinnerLevel.adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, levelList)
+        spinnerTheme.adapter = CustomGraphicComponents.setUpSpinnerAdapter(context = this, data = themeList)
+        spinnerLevel.adapter = CustomGraphicComponents.setUpSpinnerAdapter(context = this, data = levelList)
     }
 
     private fun spinnersListeners() {
