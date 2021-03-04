@@ -32,7 +32,7 @@
     <!-- play a quiz Screen-->
     <string name="answerBad">Mauvaise réponse…</string>
     <string name="answerGood">Bonne réponse</string>
-    <string name="answersGood">bonnes réponses</string>
+    <string name="answersGood">bonne(s) réponse(s)</string>
     <string name="answersNbGoodAnswers">%1$d / %2$d</string>
     <string name="answerNonExistent">Temps écoulé !</string>
     <string name="defaultNumber">0</string>
