@@ -1,7 +1,9 @@
 package com.wisefox.spaceodysseyapp.view
 
+import android.content.Context
 import android.graphics.Typeface
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.wisefox.spaceodysseyapp.R
@@ -29,6 +31,12 @@ class CustomGraphicComponents {
             //set height properties
             val snackbarView = snackbar.view
             snackbarView.minimumHeight = minHeight
+        }
+
+        fun setUpSpinnerAdapter(context: Context, data: ArrayList<String>): ArrayAdapter<*> {
+            val adapter: ArrayAdapter<*> = ArrayAdapter(context, R.layout.spinner_item, data)
+            adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+            return adapter
         }
     }
 }
