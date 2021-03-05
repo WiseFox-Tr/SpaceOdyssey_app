@@ -33,16 +33,16 @@ class SetUpQuizActivity : AppCompatActivity() {
 
     //data
     private lateinit var paramsRetrieved: Params
+    private lateinit var params: Params
     private var levelChosen = Level(0, "")
     private var themeChosen = Theme(0, "")
-
-    private lateinit var params: Params
     private lateinit var quiz :Quiz
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_up_quiz)
         paramsRetrieved = intent.getSerializableExtra("params") as Params
+        //todo: trouver une solution lorsque l'utilisateur cherche à relancer une nouvelle partie
         findViewsAndInitContent()
         fillSpinner()
         spinnersListeners()
@@ -100,7 +100,7 @@ class SetUpQuizActivity : AppCompatActivity() {
 
                 val intentPlayQuizActivity = Intent(this@SetUpQuizActivity, PlayQuizActivity::class.java)
                 intentPlayQuizActivity.putExtra("quiz", quiz)
-
+                intentPlayQuizActivity.putExtra("params", paramsRetrieved)
                 startActivity(intentPlayQuizActivity)
                 finish()
             }

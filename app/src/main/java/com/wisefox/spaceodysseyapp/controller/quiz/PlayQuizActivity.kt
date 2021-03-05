@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.wisefox.spaceodysseyapp.R
 import com.wisefox.spaceodysseyapp.controller.MainActivity
 import com.wisefox.spaceodysseyapp.model.AppConst
+import com.wisefox.spaceodysseyapp.model.Params
 import com.wisefox.spaceodysseyapp.model.Question
 import com.wisefox.spaceodysseyapp.model.Quiz
 
@@ -54,6 +55,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
 
     //Data
     private lateinit var quiz : Quiz
+    private lateinit var paramsRetrieved: Params
 
     //question index
     private var questionIndex = 0
@@ -68,6 +70,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_quiz)
         quiz = intent.getSerializableExtra("quiz") as Quiz
+        paramsRetrieved = intent.getSerializableExtra("params") as Params
         initialConfiguration()
         initTimer()
         uiDisplayAQuestion(quiz.questions[0])
@@ -210,6 +213,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
 
     private  fun goToSetUpQuiz() {
         val intentSetUpQuizActivity = Intent(this, SetUpQuizActivity::class.java)
+        intentSetUpQuizActivity.putExtra("params", paramsRetrieved)
         startActivity(intentSetUpQuizActivity)
         finish()
     }
