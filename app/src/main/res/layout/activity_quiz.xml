@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background"
-    android:padding="10dp"
     android:weightSum="1"
     tools:context=".controller.quiz.QuizActivity">
+
+    <include layout="@layout/app_bar" />
 
     <include
         layout="@layout/element_title"

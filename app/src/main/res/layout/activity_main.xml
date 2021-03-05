@@ -9,6 +9,8 @@
     android:weightSum="1"
     tools:context=".controller.MainActivity">
 
+    <include layout="@layout/app_bar" />
+
     <include
         layout="@layout/element_title"
         android:layout_width="match_parent"
