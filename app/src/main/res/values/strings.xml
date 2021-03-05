@@ -8,6 +8,10 @@
     <string name="title">Titre</string>
     <string name="whatWantToDo">Que voulez vous faire ?</string>
 
+    <!-- Menu -->
+    <string name="about">A propos</string>
+    <string name="account">Compte</string>
+
     <!-- Main Screen -->
     <string name="didYouKnowText">Sed laeditur hic coetuum magnificus splendor levitate paucorum incondita, ubi nati sunt non reputantium, sed tamquam indulta licentia vitiis ad errores lapsorum ac lasciviam. ut enim Simonides lyricus docet, beate perfecta ratione vieturo ante alia patriam esse convenit gloriosam.</string>
     <string name="didYouKnowTitle">Le saviez vous ?</string>
