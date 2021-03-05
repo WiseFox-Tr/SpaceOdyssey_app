@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="@string/account"
+        android:id="@+id/account"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_account_custom"
+        android:iconTint="@color/text_yellow_orange"
+        tools:targetApi="o" />
+
+    <item android:title="@string/mainMenu"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:title="@string/lesson"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:title="@string/quiz"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:title="@string/about"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+</menu>
