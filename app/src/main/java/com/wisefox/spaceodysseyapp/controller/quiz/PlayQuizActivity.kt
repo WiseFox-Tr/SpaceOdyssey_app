@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -13,6 +15,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.wisefox.spaceodysseyapp.R
+import com.wisefox.spaceodysseyapp.controller.CommonController
 import com.wisefox.spaceodysseyapp.controller.MainActivity
 import com.wisefox.spaceodysseyapp.model.AppConst
 import com.wisefox.spaceodysseyapp.model.Params
@@ -23,7 +26,7 @@ import com.wisefox.spaceodysseyapp.model.Quiz
 class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
 
     enum class TimerState { Stopped, Running, Over }
-
+    private lateinit var appbar: androidx.appcompat.widget.Toolbar
     //layout elements
     private lateinit var layoutBtnAnswers: LinearLayout
     private lateinit var layoutTimer: LinearLayout
@@ -79,6 +82,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     /** this method find views by id, set on click listeners and init initial content independently of question played.
      * It also stop the current timer **/
     private fun initialConfiguration() {
+        appbar = findViewById(R.id.appBar)
         //find views - layout
         layoutBtnAnswers = findViewById(R.id.layout_btnAnswers)
         layoutTimer = findViewById(R.id.layout_timer)
@@ -125,6 +129,19 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         //init content & values
         uiDisplayInitialContent()
         remainingSeconds = quiz.time
+
+        setSupportActionBar(appbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        CommonController.itemSelectedCallback(item, this)
+        finish()
+        return super.onOptionsItemSelected(item)
     }
 
     /** it looks the level of the quiz and set up a multiplier for score depending of this level.

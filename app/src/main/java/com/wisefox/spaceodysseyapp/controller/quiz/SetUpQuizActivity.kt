@@ -1,14 +1,14 @@
 package com.wisefox.spaceodysseyapp.controller.quiz
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.*
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.wisefox.spaceodysseyapp.R
 import com.wisefox.spaceodysseyapp.controller.CommonController
@@ -23,6 +23,7 @@ import kotlinx.coroutines.launch
 
 class SetUpQuizActivity : AppCompatActivity() {
 
+    private lateinit var appbar: androidx.appcompat.widget.Toolbar
     // Graphics
     private lateinit var tvTitle: TextView
     private lateinit var tvSubTitle: TextView
@@ -44,22 +45,33 @@ class SetUpQuizActivity : AppCompatActivity() {
         paramsRetrieved = intent.getSerializableExtra("params") as Params
         //todo: trouver une solution lorsque l'utilisateur cherche à relancer une nouvelle partie
         findViewsAndInitContent()
+        setSupportActionBar(appbar)
         fillSpinner()
         spinnersListeners()
     }
 
     private fun findViewsAndInitContent() {
         //find views
+        appbar = findViewById(R.id.appBar)
         tvTitle = findViewById(R.id.tv_title)
         tvSubTitle = findViewById(R.id.tv_subTitle)
         rootView = findViewById(R.id.root_setUp)
         pbLoad = findViewById(R.id.pb_setUpQuizLoadPB)
         spinnerTheme = findViewById(R.id.spinner_theme)
         spinnerLevel = findViewById(R.id.spinner_level)
-
         //init content
         tvTitle.text = getString(R.string.quiz)
         tvSubTitle.text = ""
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        CommonController.itemSelectedCallback(item, this)
+        return super.onOptionsItemSelected(item)
     }
 
     /** it puts into ArrayList<String> theme & level names and use ArrayAdapter to fill spinners **/

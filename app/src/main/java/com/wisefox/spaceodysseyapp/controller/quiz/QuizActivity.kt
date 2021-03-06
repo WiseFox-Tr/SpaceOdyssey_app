@@ -2,6 +2,8 @@ package com.wisefox.spaceodysseyapp.controller.quiz
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
@@ -18,6 +20,7 @@ import kotlinx.coroutines.launch
 
 class QuizActivity : AppCompatActivity() {
 
+    private lateinit var appbar: androidx.appcompat.widget.Toolbar
     // Graphics
     private lateinit var tvTitle: TextView
     private lateinit var tvSubTitle: TextView
@@ -29,10 +32,12 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
         findViewsAndInitContent()
+        setSupportActionBar(appbar)
     }
 
     private fun findViewsAndInitContent() {
         //find views
+        appbar = findViewById(R.id.appBar)
         tvTitle = findViewById(R.id.tv_title)
         tvSubTitle = findViewById(R.id.tv_subTitle)
         rootView = findViewById(R.id.root_quiz)
@@ -41,6 +46,16 @@ class QuizActivity : AppCompatActivity() {
         //init content
         tvTitle.text = getString(R.string.quiz)
         tvSubTitle.text = getString(R.string.whatWantToDo)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        CommonController.itemSelectedCallback(item, this)
+        return super.onOptionsItemSelected(item)
     }
 
     fun onClickSetUpQuiz(view: View) {

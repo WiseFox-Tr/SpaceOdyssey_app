@@ -3,14 +3,20 @@ package com.wisefox.spaceodysseyapp.controller
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
+import android.widget.Toolbar
 import com.wisefox.spaceodysseyapp.R
 import com.wisefox.spaceodysseyapp.controller.quiz.QuizActivity
 
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var appbar: androidx.appcompat.widget.Toolbar
     // Graphics
     private lateinit var tvTitle: TextView
     private lateinit var tvSubTitle: TextView
@@ -19,12 +25,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         findViewsAndInitContent()
+        setSupportActionBar(appbar)
     }
 
     private fun findViewsAndInitContent() {
         //find views
         tvTitle = findViewById(R.id.tv_title)
         tvSubTitle = findViewById(R.id.tv_subTitle)
+        appbar = findViewById(R.id.appBar)
 
         //init Content
         tvTitle.text = getString(R.string.welcome)
@@ -34,5 +42,15 @@ class MainActivity : AppCompatActivity() {
     fun onClickQuizActivity(view: View) {
         val intentQuizActivity = Intent(this, QuizActivity::class.java)
         startActivity(intentQuizActivity)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        CommonController.itemSelectedCallback(item, this)
+        return super.onOptionsItemSelected(item)
     }
 }
