@@ -30,17 +30,17 @@ class CommonController {
 
         fun itemSelectedCallback(item: MenuItem, context: Context) {
             when(item.itemId) {
-                R.id.menu_account -> Toast.makeText(context, "Account clicked", Toast.LENGTH_LONG).show()
+                R.id.menu_account -> Toast.makeText(context, "Account clicked", Toast.LENGTH_SHORT).show()
                 R.id.menu_mainMenu ->  {
                     val intentMainActivity = Intent(context, MainActivity::class.java)
                     startActivity(context, intentMainActivity, null)
                 }
-                R.id.menu_lesson ->  Toast.makeText(context, "Lesson clicked", Toast.LENGTH_LONG).show()
+                R.id.menu_lesson ->  Toast.makeText(context, "Lesson clicked", Toast.LENGTH_SHORT).show()
                 R.id.menu_quiz ->  {
                     val intentQuizActivity = Intent(context, QuizActivity::class.java)
                     startActivity(context, intentQuizActivity, null)
                 }
-                R.id.menu_about ->  Toast.makeText(context, "About clicked", Toast.LENGTH_LONG).show()
+                R.id.menu_about ->  Toast.makeText(context, "About clicked", Toast.LENGTH_SHORT).show()
             }
             //todo: add for each activity a finish()
         }

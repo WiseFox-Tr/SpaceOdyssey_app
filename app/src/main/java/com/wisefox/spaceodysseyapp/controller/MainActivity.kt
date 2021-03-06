@@ -53,4 +53,8 @@ class MainActivity : AppCompatActivity() {
         CommonController.itemSelectedCallback(item, this)
         return super.onOptionsItemSelected(item)
     }
+
+    fun onCLickNewsActivity(view: View) { Toast.makeText(this, "News Clicked", Toast.LENGTH_SHORT).show() }
+    fun onClickLessonActivity(view: View) { Toast.makeText(this, "Lesson Clicked", Toast.LENGTH_SHORT).show() }
+    fun onClickLogInActivity(view: View) { Toast.makeText(this, "LogIn Clicked", Toast.LENGTH_SHORT).show() }
 }

@@ -9,6 +9,7 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.wisefox.spaceodysseyapp.R
 import com.wisefox.spaceodysseyapp.controller.CommonController
@@ -82,4 +83,6 @@ class QuizActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun onClickScoreBoardActivity(view: View) { Toast.makeText(this, "ScoreBoard Clicked", Toast.LENGTH_SHORT).show() }
 }
