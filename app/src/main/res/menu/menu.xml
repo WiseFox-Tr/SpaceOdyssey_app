@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:title="@string/account"
-        android:id="@+id/account"
+        android:id="@+id/menu_account"
         android:orderInCategory="100"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_account_custom"
@@ -12,18 +12,22 @@
         tools:targetApi="o" />
 
     <item android:title="@string/mainMenu"
+        android:id="@+id/menu_mainMenu"
         android:orderInCategory="100"
         app:showAsAction="never" />
 
     <item android:title="@string/lesson"
+        android:id="@+id/menu_lesson"
         android:orderInCategory="100"
         app:showAsAction="never" />
 
     <item android:title="@string/quiz"
+        android:id="@+id/menu_quiz"
         android:orderInCategory="100"
         app:showAsAction="never" />
 
     <item android:title="@string/about"
+        android:id="@+id/menu_about"
         android:orderInCategory="100"
         app:showAsAction="never" />
 </menu>
