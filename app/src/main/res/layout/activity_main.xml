@@ -31,6 +31,7 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_margin="5dp"
+            android:onClick="onCLickNewsActivity"
             android:text="@string/news" />
 
         <com.google.android.material.button.MaterialButton
@@ -38,6 +39,7 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_margin="5dp"
+            android:onClick="onClickLessonActivity"
             android:text="@string/lesson" />
 
         <com.google.android.material.button.MaterialButton
@@ -54,6 +56,7 @@
             android:layout_height="60dp"
             android:layout_margin="5dp"
             android:backgroundTint="@color/btn_yellow_orange"
+            android:onClick="onClickLogInActivity"
             android:text="@string/logIn" />
     </LinearLayout>
 

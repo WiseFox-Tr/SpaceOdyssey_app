@@ -39,6 +39,7 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_margin="5dp"
+            android:onClick="onClickScoreBoardActivity"
             android:text="@string/scoreboard" />
 
     </LinearLayout>
