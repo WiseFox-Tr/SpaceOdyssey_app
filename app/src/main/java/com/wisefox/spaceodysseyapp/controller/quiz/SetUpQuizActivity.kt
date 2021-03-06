@@ -122,8 +122,7 @@ class SetUpQuizActivity : AppCompatActivity() {
                     pbLoad.visibility = INVISIBLE
                     CommonController.displaySnackbar(
                             rootView = rootView,
-                            message = CommonController.manageError(exception = e, context = this@SetUpQuizActivity),
-                            context = this@SetUpQuizActivity
+                            message = CommonController.manageError(exception = e, context = this@SetUpQuizActivity)
                     )
                 }
             }

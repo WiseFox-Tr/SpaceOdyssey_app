@@ -22,7 +22,7 @@ class CommonController {
             }
         }
 
-        fun displaySnackbar(rootView: View, message: String, context: Context) {
+        fun displaySnackbar(rootView: View, message: String) {
             val snackbar = Snackbar.make(rootView, message, Snackbar.LENGTH_LONG)
             CustomGraphicComponents.setSnackbarStyle(snackbar = snackbar)
             snackbar.show()
@@ -42,7 +42,7 @@ class CommonController {
                 }
                 R.id.menu_about ->  Toast.makeText(context, "About clicked", Toast.LENGTH_LONG).show()
             }
-            //todo: add for each activity a finish() 
+            //todo: add for each activity a finish()
         }
     }
 }
