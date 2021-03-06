@@ -9,10 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.wisefox.spaceodysseyapp.R
 import com.wisefox.spaceodysseyapp.controller.CommonController
@@ -31,6 +28,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var layoutBtnAnswers: LinearLayout
     private lateinit var layoutTimer: LinearLayout
     private lateinit var layoutResultAnswer: LinearLayout
+    private lateinit var layoutNextQuestion: LinearLayout
     private lateinit var layoutQuizState: LinearLayout
     private lateinit var layoutResultQuiz: LinearLayout
     // Graphics
@@ -87,6 +85,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         layoutBtnAnswers = findViewById(R.id.layout_btnAnswers)
         layoutTimer = findViewById(R.id.layout_timer)
         layoutResultAnswer = findViewById(R.id.layout_resultAnswer)
+        layoutNextQuestion = findViewById(R.id.layout_nextQuestion)
         layoutQuizState = findViewById(R.id.layout_quizState)
         layoutResultQuiz = findViewById(R.id.layout_resultQuiz)
         //find views - title
@@ -218,11 +217,13 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         pbProgressValue = 0
         uiUpdateTimeProgressBar()
 
+        layoutResultAnswer.visibility = GONE
+        layoutNextQuestion.visibility = GONE
+
         if (questionIndex < quiz.questions.size - 1) {
             questionIndex++
             layoutBtnAnswers.visibility = VISIBLE
             layoutTimer.visibility = VISIBLE
-            layoutResultAnswer.visibility = GONE
             uiDisplayAQuestion(quiz.questions[questionIndex])
         } else
             uiDisplayResultQuiz()
@@ -236,7 +237,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun goToScoreBoard() {
-        //todo: implement scoreBoard
+         Toast.makeText(this, "ScoreBoard Clicked", Toast.LENGTH_SHORT).show()
     }
 
     private fun goToMainMenu() {
@@ -327,6 +328,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
         layoutBtnAnswers.visibility = GONE
         layoutTimer.visibility = GONE
         layoutResultAnswer.visibility = VISIBLE
+        layoutNextQuestion.visibility = VISIBLE
 
         if(isGoodAnswer) {
             tvQuizStateCurrentScore.text = getString(R.string.score, quiz.score)
@@ -345,7 +347,6 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
     /** it hides play quiz part screen & displays end quiz part screen **/
     private fun uiDisplayResultQuiz() {
         layoutQuizState.visibility = GONE
-        layoutResultAnswer.visibility = GONE
         layoutResultQuiz.visibility = VISIBLE
         tvQuizResultCurrentScore.text = quiz.score.toString()
         tvResultQuizGoodAnswers.text = getString(R.string.answersNbGoodAnswers,quiz.nbGoodAnswer, quiz.nbQuestions)
