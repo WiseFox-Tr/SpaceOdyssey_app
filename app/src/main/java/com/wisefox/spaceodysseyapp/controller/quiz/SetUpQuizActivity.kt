@@ -43,7 +43,6 @@ class SetUpQuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_up_quiz)
         paramsRetrieved = intent.getSerializableExtra("params") as Params
-        //todo: trouver une solution lorsque l'utilisateur cherche à relancer une nouvelle partie
         findViewsAndInitContent()
         setSupportActionBar(appbar)
         fillSpinner()
