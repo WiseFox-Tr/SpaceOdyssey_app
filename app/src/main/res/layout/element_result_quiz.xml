@@ -72,32 +72,38 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_resultQuizNewGame"
-            android:layout_width="210dp"
+            android:layout_width="225dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/newGame"
-            android:textStyle="bold" />
+            android:fontFamily="@font/time_and_space_regular"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:text="@string/newGame"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_resultQuizScoreBoard"
-            android:layout_width="210dp"
+            android:layout_width="225dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/time_and_space_regular"
+            android:textSize="20sp"
             android:text="@string/scoreboard"
-            android:textStyle="bold" />
+            android:textAllCaps="false"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_resultQuizMainMenu"
-            android:layout_width="210dp"
+            android:layout_width="225dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="@string/mainMenu"
+            android:fontFamily="@font/comfortaa_bold"
+            android:textSize="16sp"
             app:backgroundTint="@color/btn_yellow_orange" />
     </LinearLayout>
 </LinearLayout>
