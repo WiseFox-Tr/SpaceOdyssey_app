@@ -255,7 +255,7 @@ class PlayQuizActivity : AppCompatActivity(), View.OnClickListener {
      * onTick method add +1 to progress bar value & display remaining seconds + 1 sec (to avoid to display a 0 sec remaining time)
      * **/
     private fun initTimer() {
-        timer = object : CountDownTimer(quiz.time.toLong() * 1000, 100) {
+        timer = object : CountDownTimer(quiz.time.toLong() * 1000, 125) {
             override fun onFinish() {
                 timerState = TimerState.Over
                 uiShowQuestionResult(false, 0)

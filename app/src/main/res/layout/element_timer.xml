@@ -43,7 +43,7 @@
         android:layout_marginBottom="20dp"
         android:indeterminate="false"
         android:indeterminateOnly="false"
-        android:max="100"
+        android:max="80"
         android:maxWidth="300dp"
         android:minWidth="250dp"
         android:minHeight="10dp"
