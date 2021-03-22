@@ -38,14 +38,14 @@
         layout="@layout/element_result_answer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.35"
+        android:layout_weight="0.45"
         android:visibility="gone"/>
 
     <include
         layout="@layout/element_next_question"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.25"
+        android:layout_weight="0.15"
         android:visibility="gone"/>
 
     <include
