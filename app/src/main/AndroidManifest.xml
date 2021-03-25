@@ -15,7 +15,8 @@
         android:theme="@style/Theme.SpaceOdysseyApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".controller.account.LogInActivity"></activity>
+        <activity android:name=".controller.account.RegisterActivity"></activity>
+        <activity android:name=".controller.account.LogInActivity" />
         <activity android:name=".controller.quiz.PlayQuizActivity" />
         <activity android:name=".controller.quiz.SetUpQuizActivity" />
         <activity android:name=".controller.quiz.QuizActivity" />
