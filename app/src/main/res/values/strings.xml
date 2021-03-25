@@ -16,11 +16,24 @@
     <string name="didYouKnowText">Sed laeditur hic coetuum magnificus splendor levitate paucorum incondita, ubi nati sunt non reputantium, sed tamquam indulta licentia vitiis ad errores lapsorum ac lasciviam. ut enim Simonides lyricus docet, beate perfecta ratione vieturo ante alia patriam esse convenit gloriosam.</string>
     <string name="didYouKnowTitle">Le saviez vous ?</string>
     <string name="lesson">Cours</string>
-    <string name="logIn">Se connecter</string>
+    <string name="toLogIn">Se connecter</string>
+    <string name="logIn">Me connecter</string>
     <string name="news">Actualités</string>
     <string name="quiz">Quiz</string>
     <string name="welcome">Bienvenue</string>
     <string name="whatToDo">Qu\'allez vous faire aujourd\'hui ?</string>
+
+    <!-- LogIn -->
+    <string name="mail">Mail</string>
+    <string name="mailExample">mail@mail.com</string>
+    <string name="myIds">Mes identifiants</string>
+    <string name="notAccountYet">Pas encore de compte ?</string>
+    <string name="pseudo">Pseudo</string>
+    <string name="pseudoExample">Mon pseudo</string>
+    <string name="password">Mot de passe</string>
+    <string name="passwordExample">Mdp000!</string>
+
+
 
     <!-- Quiz home Screen-->
     <string name="playAQuiz">Jouer</string>
