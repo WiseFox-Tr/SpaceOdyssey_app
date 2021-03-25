@@ -32,54 +32,42 @@
             android:textColor="@color/text_yellow_orange"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_logInPseudo"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:hint="@string/pseudo"
+            android:paddingBottom="8dp"
+            android:textColorHint="@color/text_yellow_orange"
+            app:hintTextColor="@color/text_yellow_orange"
+            app:boxStrokeColor="@color/btn_yellow_orange"
+            app:boxBackgroundColor="@color/action_purple"
+            app:errorTextColor="@color/text_red">
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ti_logInPseudo"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/pseudo"
-                android:paddingBottom="8dp"
-                android:textColorHint="@color/text_yellow_orange"
-                app:hintTextColor="@color/text_yellow_orange"
-                app:boxStrokeColor="@color/btn_yellow_orange"
-                app:boxBackgroundColor="@color/action_purple"
-                app:errorTextColor="@color/text_red">
-
-                <com.google.android.material.textfield.TextInputEditText
+             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_logInPseudo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
+                    android:layout_marginBottom="20dp"
                     android:maxLines="1"
                     android:textColor="@color/text_white" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
 
-        <LinearLayout
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_logInPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ti_logInPassword"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/password"
-                android:paddingBottom="8dp"
-                android:textColorHint="@color/text_yellow_orange"
-                app:hintTextColor="@color/text_yellow_orange"
-                app:boxStrokeColor="@color/btn_yellow_orange"
-                app:boxBackgroundColor="@color/action_purple"
-                app:errorTextColor="@color/text_red">
+            android:hint="@string/password"
+            android:paddingBottom="8dp"
+            android:textColorHint="@color/text_yellow_orange"
+            app:hintTextColor="@color/text_yellow_orange"
+            app:boxStrokeColor="@color/btn_yellow_orange"
+            app:boxBackgroundColor="@color/action_purple"
+            app:errorTextColor="@color/text_red">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_logInPassword"
@@ -88,8 +76,9 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:textColor="@color/text_white" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
     <LinearLayout
