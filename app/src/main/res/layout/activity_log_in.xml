@@ -86,7 +86,7 @@
         android:paddingBottom="30dp">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnGoToLogInScreen"
+            android:id="@+id/btn_logIn"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
