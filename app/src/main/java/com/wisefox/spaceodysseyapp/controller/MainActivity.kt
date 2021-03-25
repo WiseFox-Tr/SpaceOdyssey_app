@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import android.widget.Toolbar
 import com.wisefox.spaceodysseyapp.R
+import com.wisefox.spaceodysseyapp.controller.account.LogInActivity
 import com.wisefox.spaceodysseyapp.controller.quiz.QuizActivity
 
 
@@ -56,5 +57,9 @@ class MainActivity : AppCompatActivity() {
 
     fun onCLickNewsActivity(view: View) { Toast.makeText(this, "News Clicked", Toast.LENGTH_SHORT).show() }
     fun onClickLessonActivity(view: View) { Toast.makeText(this, "Lesson Clicked", Toast.LENGTH_SHORT).show() }
-    fun onClickLogInActivity(view: View) { Toast.makeText(this, "LogIn Clicked", Toast.LENGTH_SHORT).show() }
+
+    fun onClickLogInActivity(view: View) {
+        val intentLogInActivity = Intent(this, LogInActivity::class.java)
+        startActivity(intentLogInActivity)
+    }
 }
