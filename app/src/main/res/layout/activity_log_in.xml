@@ -86,7 +86,7 @@
         android:paddingBottom="30dp">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLogInLogActivity"
+            android:id="@+id/btnGoToLogInScreen"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
@@ -113,6 +113,7 @@
                 android:textSize="18sp" />
 
             <Button
+                android:id="@+id/btn_goToRegisterScreen"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
