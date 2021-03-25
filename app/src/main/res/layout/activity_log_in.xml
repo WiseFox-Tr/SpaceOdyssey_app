@@ -14,7 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6"
+        android:layout_weight="0.7"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingStart="20dp"
@@ -38,21 +38,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/pseudo"
-            android:paddingBottom="8dp"
-            android:textColorHint="@color/text_yellow_orange"
-            app:hintTextColor="@color/text_yellow_orange"
-            app:boxStrokeColor="@color/btn_yellow_orange"
-            app:boxBackgroundColor="@color/action_purple"
-            app:errorTextColor="@color/text_red">
+            app:counterEnabled="true"
+            app:counterMaxLength="25"
+            app:errorEnabled="true"
+            android:paddingBottom="8dp">
 
              <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_logInPseudo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:layout_marginBottom="20dp"
-                    android:maxLines="1"
-                    android:textColor="@color/text_white" />
+                 android:id="@+id/et_logInPseudo"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:inputType="textEmailAddress"
+                 android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,20 +58,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
-            android:paddingBottom="8dp"
-            android:textColorHint="@color/text_yellow_orange"
-            app:hintTextColor="@color/text_yellow_orange"
-            app:boxStrokeColor="@color/btn_yellow_orange"
-            app:boxBackgroundColor="@color/action_purple"
-            app:errorTextColor="@color/text_red">
+            app:counterEnabled="true"
+            app:counterMaxLength="30"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/white"
+            android:paddingBottom="8dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_logInPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:textColor="@color/text_white" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_logInPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,7 +80,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.4"
+        android:layout_weight="0.3"
         android:gravity="bottom"
         android:orientation="vertical"
         android:paddingBottom="30dp">
