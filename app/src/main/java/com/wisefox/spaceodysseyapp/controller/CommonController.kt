@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.snackbar.Snackbar
 import com.wisefox.spaceodysseyapp.R
+import com.wisefox.spaceodysseyapp.controller.account.LogInActivity
 import com.wisefox.spaceodysseyapp.controller.quiz.QuizActivity
 import com.wisefox.spaceodysseyapp.view.CustomGraphicComponents
 
@@ -30,7 +31,10 @@ class CommonController {
 
         fun itemSelectedCallback(item: MenuItem, context: Context) {
             when(item.itemId) {
-                R.id.menu_account -> Toast.makeText(context, "Account clicked", Toast.LENGTH_SHORT).show()
+                R.id.menu_account -> {
+                    val intentLogInActivity = Intent(context, LogInActivity::class.java)
+                    startActivity(context, intentLogInActivity, null)
+                }
                 R.id.menu_mainMenu ->  {
                     val intentMainActivity = Intent(context, MainActivity::class.java)
                     startActivity(context, intentMainActivity, null)
