@@ -29,15 +29,11 @@
     <string name="myIds">Mes identifiants</string>
     <string name="notAccountYet">Pas encore de compte ?</string>
     <string name="pseudo">Pseudo</string>
-    <string name="pseudoExample">Mon pseudo</string>
     <string name="password">Mot de passe</string>
-    <string name="passwordExample">Mdp000!</string>
-
-
+    <string name="passwordConfirmation">Confirmer le mot de passe</string>
 
     <!-- Quiz home Screen-->
     <string name="playAQuiz">Jouer</string>
-
 
     <!-- set up a quiz Screen-->
     <string name="easy">Facile</string>
@@ -65,7 +61,6 @@
     <string name="sec">10 sec</string>
     <string name="score">Score : %1$d</string>
     <string name="timeRemain">Temps restant : </string>
-
 
     <!-- warnings -->
     <string name="warningNotLogged">Tu n\'es pas connecté, tes résultats ne pourront être sauvegardés…</string>
