@@ -6,6 +6,8 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.wisefox.spaceodysseyapp.R
 
 class CustomGraphicComponents {
@@ -37,6 +39,18 @@ class CustomGraphicComponents {
             val adapter: ArrayAdapter<*> = ArrayAdapter(context, R.layout.spinner_item, data)
             adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
             return adapter
+        }
+
+        fun setTextInputStyle(context: Context, textInputLayout: TextInputLayout, textInputEditText: TextInputEditText) {
+            textInputLayout.hintTextColor = context.getColorStateList(R.color.text_yellow_orange)
+            textInputLayout.defaultHintTextColor = context.getColorStateList(R.color.text_yellow_orange)
+            textInputLayout.boxBackgroundColor = context.getColor(R.color.action_purple)
+            textInputLayout.boxStrokeColor = context.getColor(R.color.btn_yellow_orange)
+            textInputLayout.setErrorTextColor(context.getColorStateList(R.color.text_red))
+            textInputLayout.boxStrokeErrorColor = context.getColorStateList(R.color.text_red)
+            textInputLayout.counterTextColor = context.getColorStateList(R.color.text_white)
+            textInputLayout.counterOverflowTextColor = context.getColorStateList(R.color.text_red)
+            textInputEditText.setTextColor(context.getColor(R.color.text_white))
         }
     }
 }
