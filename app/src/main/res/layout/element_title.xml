@@ -15,7 +15,6 @@
         android:layout_marginTop="5dp"
         android:text="@string/title"
         android:textColor="@color/text_yellow_orange"
-        android:fontFamily="@font/the_universe_in_a_nutshell"
         android:textSize="32sp"
         android:textStyle="bold" />
 
