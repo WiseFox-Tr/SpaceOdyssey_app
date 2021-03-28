@@ -10,16 +10,23 @@ import com.google.android.material.snackbar.Snackbar
 import com.wisefox.spaceodysseyapp.R
 import com.wisefox.spaceodysseyapp.controller.account.LogInActivity
 import com.wisefox.spaceodysseyapp.controller.quiz.QuizActivity
+import com.wisefox.spaceodysseyapp.model.AppConst
 import com.wisefox.spaceodysseyapp.view.CustomGraphicComponents
 
 
 class CommonController {
     companion object {
 
+        /** returns a custom message to display in snackbar when an error occurs */
         fun manageError(exception: Exception, context: Context): String {
             return when {
                 exception.message?.contains("800", true) == true -> context.getString(R.string.errorLackOfQuestions)
-                else -> context.getString(R.string.errorGeneric)
+                exception.message?.contains(AppConst.EXCEPTION_EMPTY_FIELD, true) == true -> context.getString(R.string.errorEmptyField)
+                exception.message?.contains(AppConst.EXCEPTION_LENGTH_OVERFLOW, true) == true -> context.getString(R.string.errorLengthOverflow)
+                exception.message?.contains(AppConst.EXCEPTION_MAIL_FORMAT, true) == true -> context.getString(R.string.errorMailFormat)
+                exception.message?.contains(AppConst.EXCEPTION_PASSWORD_FORMAT, true) == true -> context.getString(R.string.errorPasswordFormat)
+                exception.message?.contains(AppConst.EXCEPTION_PASSWORDS_DO_NOT_MATCH, true) == true -> context.getString(R.string.errorPasswordCorrespondence)
+                else -> context.getString(R.string.errorGeneric) //default message
             }
         }
 
@@ -29,6 +36,7 @@ class CommonController {
             snackbar.show()
         }
 
+        /** specify instruction for each appbar menu items when one of them is clicked */
         fun itemSelectedCallback(item: MenuItem, context: Context) {
             when(item.itemId) {
                 R.id.menu_account -> {
