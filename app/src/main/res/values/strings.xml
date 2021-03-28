@@ -23,7 +23,7 @@
     <string name="welcome">Bienvenue</string>
     <string name="whatToDo">Qu\'allez vous faire aujourd\'hui ?</string>
 
-    <!-- LogIn -->
+    <!-- LogIn & Register -->
     <string name="mail">Mail</string>
     <string name="mailExample">mail@mail.com</string>
     <string name="myIds">Mes identifiants</string>
@@ -31,6 +31,7 @@
     <string name="pseudo">Pseudo</string>
     <string name="password">Mot de passe</string>
     <string name="passwordConfirmation">Confirmer le mot de passe</string>
+    <string name="register">Créer mon compte</string>
 
     <!-- Quiz home Screen-->
     <string name="playAQuiz">Jouer</string>
