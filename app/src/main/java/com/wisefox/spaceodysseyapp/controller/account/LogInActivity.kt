@@ -46,6 +46,7 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
         btnGoToRegisterScreen = findViewById(R.id.btn_goToRegisterScreen)
         btnLogIn = findViewById(R.id.btn_logIn)
 
+        //setUp title
         title.text = getString(R.string.myIds)
         subTitle.text = ""
 
