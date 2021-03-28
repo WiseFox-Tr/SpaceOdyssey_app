@@ -41,7 +41,7 @@
                  android:id="@+id/et_logInPseudo"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
-                 android:inputType="textEmailAddress"
+                 android:inputType="text"
                  android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -101,10 +101,10 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notAccountYet"
-                android:textColor="@color/text_white"
-                android:textAlignment="viewEnd"
                 android:fontFamily="@font/comfortaa_bold"
+                android:text="@string/notAccountYet"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/text_white"
                 android:textSize="18sp" />
 
             <Button
@@ -113,7 +113,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/account_button"
-                android:foreground="@drawable/account_button"/>
+                android:foreground="@drawable/account_button" />
 
         </LinearLayout>
     </LinearLayout>
