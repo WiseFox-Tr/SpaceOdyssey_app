@@ -2,6 +2,7 @@ package com.wisefox.spaceodysseyapp.view
 
 import android.content.Context
 import android.graphics.Typeface
+import android.view.Gravity
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.TextView
@@ -17,8 +18,8 @@ class CustomGraphicComponents {
                 backgroundTintColor: Int = snackbar.context.getColor(R.color.text_red),
                 textColor: Int = snackbar.context.getColor(R.color.white),
                 textSize: Float = 14f,
-                minHeight : Int = 300,
-                textAlignment: Int = TextView.TEXT_ALIGNMENT_CENTER
+                textAlignment: Int = TextView.TEXT_ALIGNMENT_CENTER,
+                gravity: Int = Gravity.CENTER_VERTICAL
         ) {
             //set colors properties
             snackbar.setTextColor(textColor)
@@ -28,11 +29,11 @@ class CustomGraphicComponents {
             val snackbarText = snackbar.view.findViewById<View>(com.google.android.material.R.id.snackbar_text) as TextView
             snackbarText.textSize = textSize
             snackbarText.textAlignment = textAlignment
+            snackbarText.gravity = gravity
             snackbarText.setTypeface(snackbarText.typeface, Typeface.BOLD)
 
             //set height properties
             val snackbarView = snackbar.view
-            snackbarView.minimumHeight = minHeight
         }
 
         fun setUpSpinnerAdapter(context: Context, data: ArrayList<String>): ArrayAdapter<*> {
