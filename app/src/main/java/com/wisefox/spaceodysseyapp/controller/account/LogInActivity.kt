@@ -76,6 +76,7 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
             btnGoToRegisterScreen -> {
                 val intentRegisterActivity = Intent(this, RegisterActivity::class.java)
                 startActivity(intentRegisterActivity)
+                finish()
             }
         }
     }
