@@ -12,10 +12,14 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.wisefox.spaceodysseyapp.R
 import com.wisefox.spaceodysseyapp.controller.CommonController
+import com.wisefox.spaceodysseyapp.model.AppConst
+import com.wisefox.spaceodysseyapp.utils.AuthServices
 import com.wisefox.spaceodysseyapp.view.CustomGraphicComponents
+import java.lang.Exception
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
+    private lateinit var rootView : View
     private lateinit var appbar: androidx.appcompat.widget.Toolbar
     private lateinit var title: TextView
     private lateinit var subTitle: TextView
@@ -39,6 +43,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun findViewsAndInitContent() {
         //find Views
+        rootView = findViewById(R.id.root_register)
         appbar = findViewById(R.id.appBar)
         title = findViewById(R.id.tv_title)
         subTitle = findViewById(R.id.tv_subTitle)
@@ -79,9 +84,33 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v) {
-            btnRegister -> { Toast.makeText(this, "Try to Register", Toast.LENGTH_SHORT).show() }
+            btnRegister -> {
+                val pseudoInput = etRegisterPseudo.text.toString().trim()
+                val mailInput = etRegisterMail.text.toString().trim()
+                val passwordInput = etRegisterPassword.text.toString()
+                val passwordConfirmationInput = etRegisterPasswordConfirmation.text.toString()
+
+                try {
+                    AuthServices.checkLengthContentEditText(pseudoInput, AppConst.maxPseudoLength)
+                    AuthServices.checkLengthContentEditText(mailInput, AppConst.maxMailLength)
+                    AuthServices.checkLengthContentEditText(passwordInput, AppConst.maxPasswordLength)
+                    AuthServices.checkLengthContentEditText(passwordConfirmationInput, AppConst.maxPasswordLength)
+                    AuthServices.checkMailFormat(mailInput)
+                    AuthServices.checkPasswordFormat(passwordInput)
+                    AuthServices.checkCorrespondenceBetweenPasswords(passwordInput, passwordConfirmationInput)
+                    //todo : call WebServices method to try to register (on secondary thread)
+
+                    //finish activity
+                    Toast.makeText(this, "Try to Register", Toast.LENGTH_SHORT).show()
+                }
+                catch (e: Exception) {
+                    e.printStackTrace()
+                    CommonController.displaySnackbar(
+                            rootView = rootView,
+                            message = CommonController.manageError(exception = e, context = this@RegisterActivity)
+                    )
+                }
+            }
         }
     }
-
-
 }
