@@ -1,5 +1,6 @@
 package com.wisefox.spaceodysseyapp.controller.account
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -71,7 +72,10 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v) {
             btnLogIn -> { Toast.makeText(this, "Try to Log In", Toast.LENGTH_SHORT).show() }
-            btnGoToRegisterScreen -> { Toast.makeText(this, "Want to go to register screen !", Toast.LENGTH_SHORT).show() }
+            btnGoToRegisterScreen -> {
+                val intentRegisterActivity = Intent(this, RegisterActivity::class.java)
+                startActivity(intentRegisterActivity)
+            }
         }
     }
 
