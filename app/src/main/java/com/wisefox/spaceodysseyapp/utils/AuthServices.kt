@@ -13,16 +13,12 @@ class AuthServices {
                 throw Exception(AppConst.EXCEPTION_EMPTY_FIELD)
             if (editTextString.length >= maxLength)
                 throw Exception(AppConst.EXCEPTION_LENGTH_OVERFLOW)
-            else
-                println("for : '$editTextString', length is valid")
         }
 
         /** Check the mail format */
         fun checkMailFormat(email: String) {
             if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
                 throw Exception(AppConst.EXCEPTION_MAIL_FORMAT)
-            else
-                println("mail format is valid")
         }
 
         /** regex Password -> check the password format */
@@ -40,17 +36,12 @@ class AuthServices {
             )
             if(!passwordREGEX.matcher(password).matches())
                 throw Exception(AppConst.EXCEPTION_PASSWORD_FORMAT)
-            else
-                println("password format is valid")
-
         }
 
         /** Check that password & password confirmation are same */
         fun checkCorrespondenceBetweenPasswords(password: String, passwordConfirmation: String) {
             if(password != passwordConfirmation)
                 throw Exception(AppConst.EXCEPTION_PASSWORDS_DO_NOT_MATCH)
-            else
-                println("passwords are identical")
         }
     }
 }
