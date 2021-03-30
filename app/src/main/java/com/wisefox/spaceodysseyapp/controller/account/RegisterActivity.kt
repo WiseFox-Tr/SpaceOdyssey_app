@@ -2,6 +2,7 @@ package com.wisefox.spaceodysseyapp.controller.account
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -98,6 +99,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                     AuthServices.checkMailFormat(mailInput)
                     AuthServices.checkPasswordFormat(passwordInput)
                     AuthServices.checkCorrespondenceBetweenPasswords(passwordInput, passwordConfirmationInput)
+                    Log.v(AppConst.TAG_CONTROLLER, "All fields content are valid")
                     //todo : call WebServices method to try to register (on secondary thread)
 
                     //finish activity
